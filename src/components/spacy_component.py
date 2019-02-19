@@ -1,8 +1,10 @@
 import spacy
 from spacy.util import set_data_path
+from services.downloader import Downloader
 
 class Spacy:
    spacy_nlp = None
+   model_downloader = None
 
    def __init__(self):
        set_data_path("models\spacy")
@@ -13,6 +15,23 @@ class Spacy:
        if not Spacy.spacy_nlp:
           Spacy.spacy_nlp = spacy.load('en_core_web_sm-2.0.0')
 
+   def download_model(self, name):
+       Spacy.model_downloader = Downloader();
+       Spacy.model_downloader.download(
+           'https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz',
+           'C:\\Projects\\nlp\\src\\models\\spacy\\en_core_web_sm-2.0.0.tar.gz')
+   
+   def get_model_status(self):
+       if Spacy.model_downloader:
+           return {
+               'status' = Spacy.model_downloader.status,
+               'current_percentage' = Spacy.model_downloader.current_percentage
+               }
+       return {
+           'status': ''
+           'current_percentage': ''
+           }
+       
    def to_spacy(self, text):
        return Spacy.spacy_nlp(text);
 

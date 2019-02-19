@@ -15,6 +15,13 @@ def spacy_index():
       title='Spacy',
    )
 
+@app.route('/spacy/nlp')
+def spacy_index_nlp():
+   return render_template(
+      'spacy/nlp.html',
+      title='Spacy',
+   )
+
 @app.route('/api/spacy')
 def api_spacy():
    text = request.args.get('text') if 'text' in request.args else ''
@@ -30,3 +37,7 @@ def api_spacy_similarity():
    text2_spacy = Spacy().to_spacy(text2)
    return jsonify({"similarity": text_spacy.similarity(text2_spacy)})
     
+@app.route('/api/spacy/modules/download')
+def api_spacy_similarity():
+   name = request.args.get('name') if 'name' in request.args else ''
+   #https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz

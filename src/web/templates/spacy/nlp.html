@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% raw %}
+
+<div id="app" v-cloak>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
+        <h1>Spacy</h1>
+        <a target="_blank" href="https://spacy.io" class="font-black">https://spacy.io</a>
+    </div>
+    <div>
+        <a target="_blank" v-bind:href="'/api/spacy?text=' + text">/api/spacy?text={text}</a>
+    </div>
+    <br /><br />
+    <h6>Features</h6>
+    <div class="block">
+        <ul style="padding-left: 20px">
+            <li>Tokenization</li>
+            <li>Noun chunks</li>
+            <li>Sentence Segmentation</li>
+            <li>Part-of-speech tagging</li>
+            <li>Named Entity Recognition 101</li>
+            <li>Word vectors</li>
+        </ul>
+    </div>
+    <br /><br />
+    <h6>Model</h6>
+    <div class="block">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="model" id="en_core_web_sm" value="en_core_web_sm" checked>
+            <label class="form-check-label" for="en_core_web_sm">
+                en_core_web_sm	<span class="text-muted">English	Vocabulary, syntax, entities (35 MB)</span>
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="model" id="en_core_web_md" value="en_core_web_md">
+            <label class="form-check-label" for="en_core_web_md">
+                en_core_web_md	<span class="text-muted">English	Vocabulary, syntax, entities, vectors (115 MB)</span>
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="model" id="en_core_web_lg" value="en_core_web_lg">
+            <label class="form-check-label" for="en_core_web_ln">
+                en_core_web_lg	<span class="text-muted">English	Vocabulary, syntax, entities, vectors (812 MB)</span>
+            </label>
+        </div>
+        <br />
+        <button v-on:click.stop.prevent="download()" type="button" class="btn btn-sm btn-outline-secondary">Download</button>
+    </div>
+    <br /><br />
+    <h6>Test</h6>
+    <div class="block">
+        <form>
+            <div class="form-group">
+                <label for="text">text</label>
+                <text-editor v-model="text" lineNumbers="false"></text-editor>
+            </div>
+            <button v-on:click.stop.prevent="run()" class="btn btn-sm btn-outline-secondary" type="submit">Run</button>
+        </form>
+        <br />
+        <div>
+            <json-viewer v-model="result"></json-viewer>
+        </div>
+    </div>
+</div>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            error: '',
+            text: '',
+            result: ''
+        },
+        created: function () {
+            
+        },
+        watch: {
+            
+        },
+        methods: {
+            run: function () {
+                this.$fetch(
+                        `/api/spacy?text=${encodeURIComponent(this.text || '')}`, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.result = json;
+                    })
+                    .catch(error => {
+                        this.error = "Error: " + error.message;
+                    });
+            },
+            download: function () {
+                this.$fetch(
+                        `/api/spacy/modules/download?name=en_core_web_sm`, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.result = json;
+                    })
+                    .catch(error => {
+                        this.error = "Error: " + error.message;
+                    });
+            }
+        }
+    });
+</script>
+
+
+{% endraw %}
+
+{% endblock %}

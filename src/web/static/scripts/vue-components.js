@@ -1,42 +1,3 @@
-Vue.prototype.$setQueryString = function (key, value) {
-    var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
-        urlQueryString = document.location.search,
-        newParam = key + '=' + value,
-        params = '?' + newParam;
-
-    // If the "search" string exists, then build params from it
-    if (urlQueryString) {
-        var updateRegex = new RegExp('([\?&])' + key + '[^&]*');
-        var removeRegex = new RegExp('([\?&])' + key + '=[^&;]+[&;]?');
-
-        if (typeof value == 'undefined' || value == null || value == '') { // Remove param if value is empty
-            params = urlQueryString.replace(removeRegex, "$1");
-            params = params.replace(/[&;]$/, "");
-
-        } else if (urlQueryString.match(updateRegex) !== null) { // If param exists already, update it
-            params = urlQueryString.replace(updateRegex, "$1" + newParam);
-
-        } else { // Otherwise, add it to end of query string
-            params = urlQueryString + '&' + newParam;
-        }
-    }
-
-    // no parameter was set so we don't need the question mark
-    params = params == '?' ? '' : params;
-
-    window.history.replaceState({}, "", baseUrl + params);
-};
-
-Vue.prototype.$getQueryString = function (name) {
-    var url = window.location.href;
-    name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-};
-
 Vue.prototype.$fetch = function (url = ``, parameters = {}) {
     return fetch(url, parameters)
         .then(r => r.text().then(text => ({ ok: r.ok, status: r.status, statusText: r.statusText, text: text })))
@@ -72,7 +33,7 @@ Vue.component('text-editor', {
     mounted: function () {
         var scope = this;
         this.textEditor = CodeMirror.fromTextArea(document.getElementById('text_editor'), {
-            lineNumbers: true
+            lineNumbers: false
         });
         this.textEditor.on('change', function (cm) {
             scope.textEditor.save();
@@ -87,5 +48,45 @@ Vue.component('text-editor', {
         //document.getElementsByClassName("CodeMirror")[0].style.minWidth = info.width + "px";
     },
     template: '<textarea id="text_editor"></textarea>'
+});
+
+Vue.component('json-viewer', {
+    props: ['value'],
+    watch: {
+        value: function (val) {
+            this.$refs.myPre.innerHTML = this.syntaxHighlight(this.stringify(val));
+        },
+    },
+
+    methods: {
+        syntaxHighlight: function (json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        },
+        stringify: function (json) {
+            if (json)
+                return JSON.stringify(json, undefined, 4);
+            else
+                return null;
+        }
+    },
+    mounted: function () {
+        var scope = this;
+    },
+    template: '<div><pre ref="myPre"></pre></div>'
 });
 
