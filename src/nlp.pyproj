@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env37|$(MSBuildProjectFullPath)</InterpreterId>
     <Name>nlp</Name>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
@@ -20,18 +20,25 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="components\allennlp_component_tests.py" />
+    <Compile Include="components\allennlp_component.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="components\__init__.py" />
+    <Compile Include="services\downloader_tests.py" />
+    <Compile Include="services\downloader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="components\spacy_component.py" />
+    <Compile Include="components\spacy_component_tests.py" />
+    <Compile Include="web\controllers\allennlp_controller.py" />
     <Compile Include="web\controllers\spacy_controller.py" />
     <Compile Include="web\controllers\home_controller.py" />
     <Compile Include="web\controllers\__init__.py" />
-    <Compile Include="web\models\azuretablestorage.py" />
-    <Compile Include="web\models\factory.py" />
-    <Compile Include="web\models\memory.py" />
-    <Compile Include="web\models\mongodb.py" />
-    <Compile Include="web\models\__init__.py" />
     <Compile Include="web\server.py" />
     <Compile Include="web\services\__init__.py" />
     <Compile Include="web\settings.py" />
-    <Compile Include="web\__init__.py" />
+    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
@@ -80,10 +87,13 @@
     <Content Include="web\templates\layout.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="spacy\" />
+    <Folder Include="models\" />
+    <Folder Include="models\allennlp\" />
+    <Folder Include="models\spacy\" />
+    <Folder Include="components\" />
+    <Folder Include="services\" />
     <Folder Include="web" />
     <Folder Include="web\controllers" />
-    <Folder Include="web\models" />
     <Folder Include="web\services" />
     <Folder Include="web\static\" />
     <Folder Include="web\static\content" />
@@ -105,6 +115,15 @@
     <Folder Include="web\templates\home" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="env37\">
+      <Id>env37</Id>
+      <Version>3.7</Version>
+      <Description>env37 (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>3.6</Version>
