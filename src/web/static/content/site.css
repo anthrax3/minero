@@ -9,6 +9,10 @@ body {
     height: 100%;
 }*/
 
+.main {
+    /*background-color: #f4f4f5;*/
+}
+
 .bg-dark-blue {
     background-color: #002041;
 }
@@ -109,6 +113,11 @@ body {
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
+.block {
+    font-size: 14px;
+    padding-left: 20px;
+}
+
 .ul-items {
     list-style: none;
     padding: 0px;
@@ -127,9 +136,7 @@ body {
         background-color: #f7f7f9;
     }
         
-        /*
- * Navbar
- */
+
 .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
@@ -137,69 +144,13 @@ body {
     box-shadow: none;
 }
 
-.navbar .form-control {
-    padding: .75rem 1rem;
-    border-width: 0;
-    border-radius: 0;
-}
-
-.form-control-dark {
-    color: #fff;
-    background-color: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .1);
-}
-
-.form-control-dark:focus {
-    border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-}
-
-.form-control-console {
-    overflow: hidden;
-    font-family: 'Inconsolata', 'Lucida Console';
-    font-size: 15px;
-}
-
-input, textarea {
+.CodeMirror, input, textarea {
     outline: none;
     box-shadow: none !important;
     border: 1px solid #ccc !important;
-}
-
-.table-console tbody td,
-.table-console tbody td pre {
-    font-family: 'Inconsolata', 'Lucida Console';
-    font-size: 14px;
-}
-
-.w-max-100 {
-    max-width: 100px;
-    overflow: hidden;
-}
-
-.w-100-precent {
-    width: 100%;
-}
-
-.h-50 {
-    height: 50px !important;
-    overflow: hidden;
-}
-
-.h-40 {
-    height: 40px !important;
-    overflow: hidden;
-}
-
-.h-100-precent {
-    min-height: 100%;
-    height: auto !important; /* cross-browser */
-    height: 100%; /* cross-browser */
-}
-
-.fixed-row-bottom {
-    position: fixed;
-    bottom: 0;
+    background-color: #f8f9fa;
+    border: 0px none;
+    border-radius: 3px;
 }
 
 .font-black {
@@ -230,22 +181,17 @@ input, textarea {
     }
 }
 
-.table th {
-    font-size: 12px;
+.string {
 }
 
-tr.border-top-0 td{
-    border-top: 0px none
+.number {
 }
 
-.inline-block {
-    display: inline-block;
+.boolean {
 }
 
-.text-break-word {
-    word-wrap: break-word;
+.null {
 }
 
-.bg-grayish {
-    background: rgba(0,0,0,.05)
+.key {
 }
