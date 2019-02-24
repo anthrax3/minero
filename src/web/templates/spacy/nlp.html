@@ -10,7 +10,7 @@
         <a target="_blank" href="https://spacy.io" class="font-black">https://spacy.io</a>
     </div>
     <div>
-        <a target="_blank" v-bind:href="'/api/spacy?text=' + text">/api/spacy?text={text}</a>
+        <a target="_blank" v-bind:href="run_url">/api/spacy?model={model}&text={text}</a>
     </div>
     <br /><br />
     <h6>Features</h6>
@@ -68,7 +68,7 @@
                 <label for="text">model</label>
                 <select v-model="model">
                     <option v-for="option in models" v-bind:value="option.name">
-                        {{ option.name }}
+                        {{option.name}}
                     </option>
                 </select>
             </div>
@@ -83,8 +83,9 @@
             <div>{{run_error}}</div>
         </form>
         <br />
-        <div>
-            <json-viewer v-model="result"></json-viewer>
+        <div v-if="run_result">
+            <a target="_blank" v-bind:href="run_url">/api/spacy?model={model}&text={text}</a>
+            <json-viewer v-model="run_result"></json-viewer>
         </div>
     </div>
 </div>
@@ -96,7 +97,6 @@
             error: '',
             text: '',
             model: '',
-            result: '',
             models: null,
             download_clicked: {},
             download_error: {},
@@ -105,29 +105,33 @@
             unload_clicked: {},
             unload_error: {},
             run_clicked: null,
-            run_error: null
+            run_error: null,
+            run_result: '',
+            run_url: `/api/spacy?model=&text=`
         },
         created: function () {
             this.timer = setInterval(this.update_models_status, 1000)
         },
         watch: {
-            
+
         },
         methods: {
             run: function () {
+                this.run_result = {};
+                this.run_error = null;
+                this.run_url = `/api/spacy?model=${encodeURIComponent(this.model || '')}&text=${encodeURIComponent(this.text || '')}`;
                 if (!this.model) {
                     this.run_error = "Error: Please select the model";
                     return;
                 }
                 this.run_clicked = true;
-                this.run_error = null;
                 this.$fetch(
-                    `/api/spacy?model=${encodeURIComponent(this.model || '')}&text=${encodeURIComponent(this.text || '')}`, {
+                    this.run_url, {
                         method: "GET"
                     })
                     .then(json => {
                         this.run_clicked = false;
-                        this.result = json;
+                        this.run_result = json;
                     })
                     .catch(error => {
                         this.run_clicked = false;
@@ -139,18 +143,18 @@
                     return;
                 this.download_clicked[name] = true;
                 this.download_error[name] = null;
-                    this.$fetch(
-                        `/api/spacy/models/download/${encodeURIComponent(name)}`, {
-                            method: "GET"
-                        })
-                        .then(json => {
-                            this.models = json;
-                            this.download_clicked[name] = false;
-                        })
-                        .catch(error => {
-                            this.download_error[name] = "Error: " + error.message;
-                            this.download_clicked[name] = false;
-                        });
+                this.$fetch(
+                    `/api/spacy/models/download/${encodeURIComponent(name)}`, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.models = json;
+                        this.download_clicked[name] = false;
+                    })
+                    .catch(error => {
+                        this.download_error[name] = "Error: " + error.message;
+                        this.download_clicked[name] = false;
+                    });
             },
             load: function (name) {
                 if (this.load_clicked[name])
