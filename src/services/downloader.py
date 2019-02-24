@@ -1,6 +1,7 @@
 from __future__ import print_function
 import requests
 import zipfile
+import tarfile
 import warnings
 from threading import Thread
 from sys import stdout
@@ -15,16 +16,13 @@ class Downloader:
     def __init__(self, *args, **kwargs):
         self.status = None
         self.content_size = None
-        self.current_size = None
         self.current_percentage = None
+        self.error = None
+        self.is_progress = False
         self.thread = None
 
-    def download(self, file_url, dest_path, overwrite=False, unzip=False):
-        self.status = "Downloading"
-        self.content_size = None
-        self.current_size = None
-        self.current_percentage = None
-        self.thread = Thread(target = self.download_in_background, args=[file_url, dest_path, overwrite, unzip])
+    def download(self, file_url, dest_path, overwrite=False):
+        self.thread = Thread(target = self.download_in_background, args=[file_url, dest_path, overwrite])
         self.thread.start()
 
     def stop(self):
@@ -33,35 +31,46 @@ class Downloader:
     def wait(self):
         self.thread.join()
 
-    def download_in_background(self, file_url, dest_path, overwrite=False, unzip=False):
-        self.ensure_path(dest_path)
+    def download_in_background(self, file_url, dest_path, overwrite):
+        if self.is_progress:
+            return;
 
-        if not exists(dest_path) or overwrite:
-            session = requests.Session()
-            response = session.get(file_url, params={}, stream=True, verify=False)
-            self.save_response_content(response, dest_path)
-            if unzip:
-                self.unzip(dest_path)
+        try:
+            self.is_progress = True
+            self.status = "Downloading"
+            self.content_size = None
+            self.current_percentage = None
 
-        if self.status == "Stopping":
-            self.status = "Stopped"
-        self.status = "Completed"
+            self.ensure_path(dest_path)
+
+            if not exists(dest_path) or overwrite:
+                session = requests.Session()
+                response = session.get(file_url, params={}, stream=True, verify=False)
+                self.save_response_content(response, dest_path)
+        
+            if self.status == "Stopped" or self.status == "Error":
+                self.is_progress = False
+                return;
+        
+            self.on_downloaded(file_url, dest_path, overwrite)
+        
+            if self.status == "Stopped" or self.status == "Error":
+                self.is_progress = False
+                return;
+
+            self.is_progress = False
+            self.status = "Completed"
+
+        except Exception as e:
+            self.is_progress = False
+            self.status = 'Error'
+            self.error = 'Error: ' + str(e)
+            return
 
     def ensure_path(self, dest_path):
        destination_directory = dirname(dest_path)
        if not exists(destination_directory):
           makedirs(destination_directory)
-
-    def unzip(self, dest_path):
-        self.status = "Unziping"
-        try:
-            with zipfile.ZipFile(dest_path, 'r') as z:
-                destination_directory = dirname(dest_path)
-                z.extractall(destination_directory)
-        except Exception as e:
-            warnings.warn('Error durring unziping: ' + str(e))
-            return
-        self.status = "Unziped"
 
     def save_response_content(self, response, dest_path):
         self.content_size = int(response.headers['content-length'])
@@ -69,6 +78,7 @@ class Downloader:
         with open(dest_path, 'wb') as f:
             for chunk in response.iter_content(Downloader.CHUNK_SIZE):
                 if self.status == 'Stopping':
+                    self.status = "Stopped"
                     return
                 if chunk:  # filter out keep-alive new chunks
                     f.write(chunk)
@@ -84,3 +94,6 @@ class Downloader:
                 return '{:.1f} {}{}'.format(num, unit, suffix)
             num /= 1024.0
         return '{:.1f} {}{}'.format(num, 'Yi', suffix)
+
+    def on_downloaded(self, file_url, dest_path, overwrite):
+        pass

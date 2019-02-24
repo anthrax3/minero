@@ -25,38 +25,62 @@
         </ul>
     </div>
     <br /><br />
-    <h6>Model</h6>
+    <h6>Models</h6>
     <div class="block">
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="model" id="en_core_web_sm" value="en_core_web_sm" checked>
-            <label class="form-check-label" for="en_core_web_sm">
-                en_core_web_sm	<span class="text-muted">English	Vocabulary, syntax, entities (35 MB)</span>
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="model" id="en_core_web_md" value="en_core_web_md">
-            <label class="form-check-label" for="en_core_web_md">
-                en_core_web_md	<span class="text-muted">English	Vocabulary, syntax, entities, vectors (115 MB)</span>
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="model" id="en_core_web_lg" value="en_core_web_lg">
-            <label class="form-check-label" for="en_core_web_ln">
-                en_core_web_lg	<span class="text-muted">English	Vocabulary, syntax, entities, vectors (812 MB)</span>
-            </label>
-        </div>
-        <br />
-        <button v-on:click.stop.prevent="download()" type="button" class="btn btn-sm btn-outline-secondary">Download</button>
+        <ul style="padding-left: 20px">
+            <li v-for="model in models">
+                {{model.name}}	<span class="text-muted">{{model.description}}</span>
+                <div>
+                    <div class="d-inline-block align-top">
+                        <div v-if="model.is_downloaded && !model.is_loaded" class="mr-5">
+                            <button v-on:click.stop.prevent="load(model.name)" type="button" class="btn btn-sm btn-outline-secondary">
+                                Load
+                                <span v-if="load_clicked[model.name]" class="loader"></span>
+                            </button>
+                            <div v-if="load_error[model.name]">{{load_error[model.name]}}</div>
+                        </div>
+                        <div v-if="model.is_loaded" class="mr-5">
+                            <button v-on:click.stop.prevent="unload(model.name)" type="button" class="btn btn-sm btn-outline-secondary">
+                                Unload
+                                <span v-if="unload_clicked[model.name]" class="loader"></span>
+                            </button>
+                            <div v-if="unload_error[model.name]">{{load_error[model.name]}}</div>
+                        </div>
+                    </div>
+                    <div class="d-inline-block align-top">
+                        <button v-on:click.stop.prevent="download(model.name)" type="button" class="btn btn-sm btn-outline-secondary">
+                            Download
+                            <span v-if="download_clicked[model.name] || model.is_downloading" class="loader"></span>
+                        </button>
+                        <div v-if="download_error[model.name]">{{download_error[model.name]}}</div>
+                        <div class="text-muted">{{model.download_status}} <span v-if="model.download_percentage">{{model.download_percentage}}%</span></div>
+                        <div>{{model.download_error}}</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
     <br /><br />
     <h6>Test</h6>
     <div class="block">
         <form>
             <div class="form-group">
+                <label for="text">model</label>
+                <select v-model="model">
+                    <option v-for="option in models" v-bind:value="option.name">
+                        {{ option.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="text">text</label>
                 <text-editor v-model="text" lineNumbers="false"></text-editor>
             </div>
-            <button v-on:click.stop.prevent="run()" class="btn btn-sm btn-outline-secondary" type="submit">Run</button>
+            <button v-on:click.stop.prevent="run()" class="btn btn-sm btn-outline-secondary" type="submit">
+                Run
+                <span v-if="run_clicked" class="loader"></span>
+            </button>
+            <div>{{run_error}}</div>
         </form>
         <br />
         <div>
@@ -71,34 +95,105 @@
         data: {
             error: '',
             text: '',
-            result: ''
+            model: '',
+            result: '',
+            models: null,
+            download_clicked: {},
+            download_error: {},
+            load_clicked: {},
+            load_error: {},
+            unload_clicked: {},
+            unload_error: {},
+            run_clicked: null,
+            run_error: null
         },
         created: function () {
-            
+            this.timer = setInterval(this.update_models_status, 1000)
         },
         watch: {
             
         },
         methods: {
             run: function () {
+                if (!this.model) {
+                    this.run_error = "Error: Please select the model";
+                    return;
+                }
+                this.run_clicked = true;
+                this.run_error = null;
                 this.$fetch(
-                        `/api/spacy?text=${encodeURIComponent(this.text || '')}`, {
+                    `/api/spacy?model=${encodeURIComponent(this.model || '')}&text=${encodeURIComponent(this.text || '')}`, {
                         method: "GET"
                     })
                     .then(json => {
+                        this.run_clicked = false;
                         this.result = json;
                     })
                     .catch(error => {
-                        this.error = "Error: " + error.message;
+                        this.run_clicked = false;
+                        this.run_error = "Error: " + error.message;
                     });
             },
-            download: function () {
+            download: function (name) {
+                if (this.download_clicked[name])
+                    return;
+                this.download_clicked[name] = true;
+                this.download_error[name] = null;
+                    this.$fetch(
+                        `/api/spacy/models/download/${encodeURIComponent(name)}`, {
+                            method: "GET"
+                        })
+                        .then(json => {
+                            this.models = json;
+                            this.download_clicked[name] = false;
+                        })
+                        .catch(error => {
+                            this.download_error[name] = "Error: " + error.message;
+                            this.download_clicked[name] = false;
+                        });
+            },
+            load: function (name) {
+                if (this.load_clicked[name])
+                    return;
+                this.load_clicked[name] = true;
+                this.load_error[name] = null;
                 this.$fetch(
-                        `/api/spacy/modules/download?name=en_core_web_sm`, {
+                    `/api/spacy/models/load/${encodeURIComponent(name)}`, {
                         method: "GET"
                     })
                     .then(json => {
-                        this.result = json;
+                        this.models = json;
+                        this.load_clicked[name] = false;
+                    })
+                    .catch(error => {
+                        this.load_error[name] = "Error: " + error.message;
+                        this.load_clicked[name] = false;
+                    });
+            },
+            unload: function (name) {
+                if (this.unload_clicked[name])
+                    return;
+                this.unload_clicked[name] = true;
+                this.$fetch(
+                    `/api/spacy/models/unload/${encodeURIComponent(name)}`, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.models = json;
+                        this.unload_clicked[name] = false;
+                    })
+                    .catch(error => {
+                        this.unload_error[name] = "Error: " + error.message;
+                        this.unload_clicked[name] = false;
+                    });
+            },
+            update_models_status: function () {
+                this.$fetch(
+                    `/api/spacy/models/status`, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.models = json;
                     })
                     .catch(error => {
                         this.error = "Error: " + error.message;
