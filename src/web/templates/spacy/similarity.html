@@ -6,22 +6,17 @@
 
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
-        <h1>Spacy - NLP</h1>
+        <h1>Spacy - Similarity</h1>
         <a target="_blank" href="https://spacy.io" class="font-black">https://spacy.io</a>
     </div>
     <div>
-        <a target="_blank" v-bind:href="run_url">/api/spacy/nlp?model={model}&document={document}</a>
+        <a target="_blank" v-bind:href="run_url">/api/spacy/similarity?model={model}&document={document}&similarTo={similarTo}</a>
     </div>
     <br /><br />
     <h6>Features</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Tokenization</li>
-            <li>Noun chunks</li>
-            <li>Sentence Segmentation</li>
-            <li>Part-of-speech tagging</li>
-            <li>Named Entity Recognition 101</li>
-            <li>Word vectors</li>
+            <li>Similarity</li>
         </ul>
     </div>
     <br /><br />
@@ -60,6 +55,10 @@
                 <label for="text">document</label>
                 <text-editor v-model="document" lineNumbers="false"></text-editor>
             </div>
+            <div class="form-group">
+                <label for="text">similarTo</label>
+                <text-editor v-model="similarTo" lineNumbers="false"></text-editor>
+            </div>
             <button v-on:click.stop.prevent="run()" class="btn btn-sm btn-outline-secondary" type="submit">
                 Run
                 <span v-if="run_clicked" class="loader"></span>
@@ -68,7 +67,7 @@
         </form>
         <br />
         <div v-if="run_result">
-            <a target="_blank" v-bind:href="run_url">/api/spacy/nlp?model={model}&document={document}</a>
+            <a target="_blank" v-bind:href="run_url">/api/spacy/similarity?model={model}&document={document}&similarTo={similarTo}</a>
             <json-viewer v-model="run_result"></json-viewer>
         </div>
     </div>
@@ -80,11 +79,12 @@
         data: {
             model: '',
             document: '',
+            similarTo: '',
             example: '',
             run_clicked: null,
             run_error: null,
             run_result: '',
-            run_url: `/api/spacy/nlp?model=&document=`
+            run_url: `/api/spacy/similarity?model=&document=&similarTo=`
         },
         watch: {
             example: function (val) {
@@ -99,7 +99,7 @@
             run: function () {
                 this.run_result = {};
                 this.run_error = null;
-                this.run_url = `/api/spacy/nlp?model=${encodeURIComponent(this.model || '')}&document=${encodeURIComponent(this.document || '')}`;
+                this.run_url = `/api/spacy/similarity?model=${encodeURIComponent(this.model || '')}&document=${encodeURIComponent(this.document || '')}&similarTo=${encodeURIComponent(this.similarTo || '')}`;
                 if (!this.model) {
                     this.run_error = "Error: Please select the model";
                     return;

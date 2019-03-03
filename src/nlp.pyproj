@@ -29,6 +29,9 @@
     <Compile Include="components\spacy_component_tests.py" />
     <Compile Include="services\downloader.py" />
     <Compile Include="services\downloader_tests.py" />
+    <Compile Include="services\models.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="web\controllers\allennlp_controller.py" />
     <Compile Include="web\controllers\spacy_controller.py" />
     <Compile Include="web\controllers\home_controller.py" />
@@ -36,6 +39,7 @@
     <Compile Include="web\server.py" />
     <Compile Include="web\services\__init__.py" />
     <Compile Include="web\settings.py" />
+    <Compile Include="config.py" />
     <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +84,17 @@
     <Content Include="web\static\libs\respond.min.js" />
     <Content Include="web\static\libs\vue\vue.js" />
     <Content Include="web\static\scripts\vue-components.js" />
+    <Content Include="web\templates\allennlp\event2mind.html" />
+    <Content Include="web\templates\allennlp\open_information_extraction.html" />
+    <Content Include="web\templates\allennlp\dependency_parsing.html" />
+    <Content Include="web\templates\allennlp\coreference_resolution.html" />
+    <Content Include="web\templates\allennlp\textual_entailment.html" />
+    <Content Include="web\templates\allennlp\machine_comprehension.html" />
+    <Content Include="web\templates\allennlp\semantic_role_labeling.html" />
+    <Content Include="web\templates\allennlp\index.html" />
+    <Content Include="web\templates\allennlp\constituency_parsing.html" />
+    <Content Include="web\templates\allennlp\named_entity_recognition.html" />
+    <Content Include="web\templates\spacy\similarity.html" />
     <Content Include="web\templates\spacy\nlp.html" />
     <Content Include="web\templates\spacy\index.html" />
     <Content Include="web\templates\home\index.html" />
@@ -110,6 +125,7 @@
     <Folder Include="web\static\libs\vue" />
     <Folder Include="web\static\scripts" />
     <Folder Include="web\templates" />
+    <Folder Include="web\templates\allennlp\" />
     <Folder Include="web\templates\spacy\" />
     <Folder Include="web\templates\home" />
   </ItemGroup>

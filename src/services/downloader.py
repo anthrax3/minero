@@ -6,6 +6,7 @@ import warnings
 from threading import Thread
 from sys import stdout
 from os import makedirs
+import os
 from os.path import dirname
 from os.path import exists
 
@@ -20,10 +21,16 @@ class Downloader:
         self.error = None
         self.is_progress = False
         self.thread = None
+        self.path = kwargs['path'] if 'path' in kwargs else None
+        self.url = kwargs['url'] if 'url' in kwargs else None
+        self.overwrite = kwargs['overwrite'] if 'overwrite' in kwargs else None
 
-    def download(self, file_url, dest_path, overwrite=False):
-        self.thread = Thread(target = self.download_in_background, args=[file_url, dest_path, overwrite])
+    def download(self):
+        self.thread = Thread(target = self.download_in_background)
         self.thread.start()
+
+    def is_downloaded(self):
+        return os.path.exists(self.path)
 
     def stop(self):
         self.status = "Stopping"
@@ -31,7 +38,7 @@ class Downloader:
     def wait(self):
         self.thread.join()
 
-    def download_in_background(self, file_url, dest_path, overwrite):
+    def download_in_background(self):
         if self.is_progress:
             return;
 
@@ -41,18 +48,18 @@ class Downloader:
             self.content_size = None
             self.current_percentage = None
 
-            self.ensure_path(dest_path)
+            self.ensure_path()
 
-            if not exists(dest_path) or overwrite:
+            if not exists(self.path) or self.overwrite:
                 session = requests.Session()
-                response = session.get(file_url, params={}, stream=True, verify=False)
-                self.save_response_content(response, dest_path)
+                response = session.get(self.url, params={}, stream=True, verify=False)
+                self.save_response_content(response)
         
             if self.status == "Stopped" or self.status == "Error":
                 self.is_progress = False
                 return;
         
-            self.on_downloaded(file_url, dest_path, overwrite)
+            self.on_downloaded()
         
             if self.status == "Stopped" or self.status == "Error":
                 self.is_progress = False
@@ -67,15 +74,15 @@ class Downloader:
             self.error = 'Error: ' + str(e)
             return
 
-    def ensure_path(self, dest_path):
-       destination_directory = dirname(dest_path)
+    def ensure_path(self):
+       destination_directory = dirname(self.path)
        if not exists(destination_directory):
           makedirs(destination_directory)
 
-    def save_response_content(self, response, dest_path):
+    def save_response_content(self, response):
         self.content_size = int(response.headers['content-length'])
         self.current_size = 0
-        with open(dest_path, 'wb') as f:
+        with open(self.path, 'wb') as f:
             for chunk in response.iter_content(Downloader.CHUNK_SIZE):
                 if self.status == 'Stopping':
                     self.status = "Stopped"
@@ -95,5 +102,5 @@ class Downloader:
             num /= 1024.0
         return '{:.1f} {}{}'.format(num, 'Yi', suffix)
 
-    def on_downloaded(self, file_url, dest_path, overwrite):
+    def on_downloaded(self):
         pass

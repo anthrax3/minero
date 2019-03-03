@@ -26,34 +26,39 @@ def spacy_index_nlp():
       title='Spacy',
    )
 
-@app.route('/api/spacy')
+@app.route('/api/spacy/nlp')
 def api_spacy():
     try:
-        text = request.args.get('text') if 'text' in request.args else ''
         model = request.args.get('model') if 'model' in request.args else ''
-        pretty = request.args.get('pretty').lower() in ("yes", "true", "t", "1") if 'pretty' in request.args else False
-        model_dict = spacy.nlp(model, text)
-        return jsonify(model_dict)
+        document = request.args.get('document') if 'document' in request.args else ''
+        result = spacy.nlp(model, document)
+        return jsonify(result)
     except Exception as e:
         logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
         response = jsonify({"error": str(e)})
         response.status_code = 400
         return response
    
+@app.route('/spacy/similarity')
+def spacy_index_similarity():
+   return render_template(
+      'spacy/similarity.html',
+      title='Spacy',
+   )
 
 @app.route('/api/spacy/similarity')
 def api_spacy_similarity():
-   text = request.args.get('text') if 'text' in request.args else ''
-   text2 = request.args.get('text2') if 'text2' in request.args else ''
-   text_spacy = spacy.to_spacy(text)
-   text2_spacy = spacy.to_spacy(text2)
-   return jsonify({"similarity": text_spacy.similarity(text2_spacy)})
+   model = request.args.get('model') if 'model' in request.args else ''
+   document = request.args.get('document') if 'document' in request.args else ''
+   similarTo = request.args.get('similarTo') if 'similarTo' in request.args else ''
+   result = spacy.similarity(model, document, similarTo)
+   return jsonify(result)
     
 @app.route('/api/spacy/models/download/<name>')
 def api_spacy_models_download(name):
     try:
-        spacy.download_model(name)
-        return jsonify(spacy.get_model_status())
+        spacy.models.download(name)
+        return jsonify(spacy.models.get_status())
     except Exception as e:
         logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
         response = jsonify({"error": str(e)})
@@ -63,8 +68,8 @@ def api_spacy_models_download(name):
 @app.route('/api/spacy/models/load/<name>')
 def api_spacy_models_load(name):
     try:
-        spacy.load_model(name)
-        return jsonify(spacy.get_model_status())
+        spacy.models.load(name)
+        return jsonify(spacy.models.get_status())
     except Exception as e:
         logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
         response = jsonify({"error": str(e)})
@@ -74,8 +79,8 @@ def api_spacy_models_load(name):
 @app.route('/api/spacy/models/unload/<name>')
 def api_spacy_models_unload(name):
     try:
-        spacy.unload_model(name)
-        return jsonify(spacy.get_model_status())
+        spacy.models.unload(name)
+        return jsonify(spacy.models.get_status())
     except Exception as e:
         logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
         response = jsonify({"error": str(e)})
@@ -85,7 +90,7 @@ def api_spacy_models_unload(name):
 @app.route('/api/spacy/models/status')
 def api_spacy_models_status():
     try:
-        return jsonify(spacy.get_model_status())
+        return jsonify(spacy.models.get_status())
     except Exception as e:
         logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
         response = jsonify({"error": str(e)})
