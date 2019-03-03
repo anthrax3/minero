@@ -46,6 +46,8 @@
     <Compile Include="cerebro\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="package\package.bat" />
+    <Content Include="package\package.spec" />
     <Content Include="requirements.txt" />
     <Content Include="cerebro\web\static\content\bootstrap.css" />
     <Content Include="cerebro\web\static\content\bootstrap.min.css" />
@@ -133,6 +135,7 @@
     <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\spacy\" />
     <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\home\" />
     <Folder Include="cerebro\models\" />
+    <Folder Include="package\" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env37\">
