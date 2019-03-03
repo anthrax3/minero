@@ -13,10 +13,10 @@
         <a target="_blank" v-bind:href="run_url">/api/spacy/similarity?model={model}&document={document}&similarTo={similarTo}</a>
     </div>
     <br /><br />
-    <h6>Features</h6>
+    <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Similarity</li>
+            <li>Score the similarity between <i>document</i> and <i>similarTo</i>.</li>
         </ul>
     </div>
     <br /><br />
@@ -38,7 +38,7 @@
                 <select v-model="model" class="d-block">
                     <option value="en_core_web_sm-2.0.0">en_core_web_sm-2.0.0</option>
                     <option value="en_core_web_md-2.0.0">en_core_web_md-2.0.0</option>
-                    <option value="ven_core_web_lg-2.0.0">ven_core_web_lg-2.0.0</option>
+                    <option value="en_core_web_lg-2.0.0">en_core_web_lg-2.0.0</option>
                     <option value="en_vectors_web_lg-2.0.0">en_vectors_web_lg-2.0.0</option>
                     <option value="de_core_news_sm-2.0.0">de_core_news_sm-2.0.0</option>
                     <option value="es_core_news_sm-2.0.0">es_core_news_sm-2.0.0</option>

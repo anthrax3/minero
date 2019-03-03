@@ -1,9 +1,11 @@
 from config import models_path
 
 class Model:
-   def __init__(self, name, description, downloader):
+   def __init__(self, name, description = None, downloader = None, size = None, displayName = None):
       self.name = name
+      self.displayName = displayName
       self.description = description
+      self.size = size
       self.downloader = downloader
       self.model = None
 
@@ -78,7 +80,10 @@ class Models:
            model = self.models[model_name]
            status.append({
                'name': model_name,
+               'displayName' : self.models[model_name].displayName,
                'description' : self.models[model_name].description,
+               'size' : self.models[model_name].size,
+               'url' : self.models[model_name].downloader.url,
                'is_loaded': self.is_loaded(model_name),
                'is_downloaded': self.is_downloaded(model_name),
                'is_downloading': self.models[model_name].downloader.is_progress,

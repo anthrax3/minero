@@ -24,6 +24,8 @@
     <Compile Include="components\allennlp_component.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="components\gensim_component.py" />
+    <Compile Include="components\gensim_component_tests.py" />
     <Compile Include="components\__init__.py" />
     <Compile Include="components\spacy_component.py" />
     <Compile Include="components\spacy_component_tests.py" />
@@ -32,6 +34,7 @@
     <Compile Include="services\models.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="web\controllers\gensim_controller.py" />
     <Compile Include="web\controllers\allennlp_controller.py" />
     <Compile Include="web\controllers\spacy_controller.py" />
     <Compile Include="web\controllers\home_controller.py" />
@@ -94,6 +97,8 @@
     <Content Include="web\templates\allennlp\index.html" />
     <Content Include="web\templates\allennlp\constituency_parsing.html" />
     <Content Include="web\templates\allennlp\named_entity_recognition.html" />
+    <Content Include="web\templates\gensim\index.html" />
+    <Content Include="web\templates\gensim\summarization.html" />
     <Content Include="web\templates\spacy\similarity.html" />
     <Content Include="web\templates\spacy\nlp.html" />
     <Content Include="web\templates\spacy\index.html" />
@@ -126,6 +131,7 @@
     <Folder Include="web\static\scripts" />
     <Folder Include="web\templates" />
     <Folder Include="web\templates\allennlp\" />
+    <Folder Include="web\templates\gensim\" />
     <Folder Include="web\templates\spacy\" />
     <Folder Include="web\templates\home" />
   </ItemGroup>

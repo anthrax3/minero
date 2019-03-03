@@ -170,7 +170,8 @@ Vue.component('models', {
     template: `
 <ul style="padding-left: 20px">
     <li v-for="model in models">
-        {{ model.name }}	<span class="text-muted">{{ model.description }}</span>
+        <a v-bind:href="model.url" class="text-dark">{{model.displayName || model.name}}</a> <span class="text-muted">{{model.size}}</span> 
+        <div class="text-muted">{{model.description}}</div> 
         <div>
         <div class="d-inline-block align-top">
             <div v-if="model.is_downloaded && !model.is_loaded" class="mr-5">
