@@ -6,17 +6,17 @@
 
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
-        <h1>Gensim - Summarization</h1>
-        <a target="_blank" href="https://radimrehurek.com/gensim/summarization/summariser.html" class="font-black">https://radimrehurek.com/gensim/summarization/summariser.html</a>
+        <h1>TextBlob - Spelling correction</h1>
+        <a target="_blank" href="https://github.com/sloria/TextBlob" class="font-black">https://github.com/sloria/TextBlob</a>
     </div>
     <div>
-        <a target="_blank" v-bind:href="run_url">/api/gensim/summarization?document={document}</a>
+        <a target="_blank" v-bind:href="run_url">/api/textblob/spelling_correction?document={document}</a>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Summarization</li>
+            <li></li>
         </ul>
     </div>
     <br /><br />
@@ -40,7 +40,7 @@
         </form>
         <br />
         <div v-if="run_result">
-            <a target="_blank" v-bind:href="run_url">/api/gensim/summarization?document={document}</a>
+            <a target="_blank" v-bind:href="run_url">/api/textblob/spelling_correction?document={document}</a>
             <json-viewer v-model="run_result"></json-viewer>
         </div>
     </div>
@@ -56,7 +56,7 @@
             run_clicked: null,
             run_error: null,
             run_result: '',
-            run_url: `/api/gensim/summarization?document=`
+            run_url: `/api/textblob/spelling_correction?document=`
         },
         watch: {
             example: function (val) {
@@ -71,7 +71,7 @@
             run: function () {
                 this.run_result = {};
                 this.run_error = null;
-                this.run_url = `/api/gensim/summarization?document=${encodeURIComponent(this.document || '')}`;
+                this.run_url = `/api/textblob/spelling_correction?document=${encodeURIComponent(this.document || '')}`;
                 this.run_clicked = true;
                 this.$fetch(
                     this.run_url, {

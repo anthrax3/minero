@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="app" v-cloak>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
+        <h1>TextBlob</h1>
+        <a target="_blank" href=https://github.com/sloria/TextBlob" class="font-black">https://github.com/sloria/TextBlob</a>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <a href="/textblob/nlp">nlp</a>
+            </li>
+            <li>
+                <a href="/textblob/spelling_correction">spelling_correction</a>
+            </li>
+            <li>
+                <a href="/textblob/language_detection">language_detection</a>
+            </li>
+            <li>
+                <a href="/textblob/translation">translation</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

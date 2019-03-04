@@ -18,9 +18,7 @@ class Spacy:
        self.models = SpacyModels()
        pass
 
-   def nlp(self, model, document):
-        try:
-
+   def nlp(self, document):
            is_valid, error = self.models.validate(model)
            if not is_valid:
                return {'error': error}
@@ -72,12 +70,8 @@ class Spacy:
                   })
            
            return doc_dict
-        except Exception as e:
-           logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-           return {"error": str(e)} 
 
    def similarity(self, model, document, similarTo):
-        try:
            is_valid, error = self.models.validate(model)
            if not is_valid:
                return {'error': error}
@@ -86,9 +80,6 @@ class Spacy:
            similarTo_spacy = self.models.get(model).model(similarTo)
            prediction = document_spacy.similarity(similarTo_spacy)
            return {'similarity': prediction};
-        except Exception as e:
-           logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-           return {"error": str(e)} 
 
 class SpacyModels(Models):
    def __init__(self):

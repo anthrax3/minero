@@ -1,10 +1,10 @@
 import unittest
-from cerebro.components.gensim_component import Gensim
+from cerebro.components.textblob_component import Gensim
 
-class GensimTests(unittest.TestCase):
-     def test_summarize(self):
-       sut = Gensim()
-       summary = sut.summarize("Thomas A. Anderson is a man living two lives. By day he is an " + \
+class TextBlobTests(unittest.TestCase):
+     def test_nlp(self):
+       sut = TextBlob()
+       result = sut.nlp("Thomas A. Anderson is a man living two lives. By day he is an " + \
     "average computer programmer and by night a hacker known as " + \
     "Neo. Neo has always questioned his reality, but the truth is " + \
     "far beyond his imagination. Neo finds himself targeted by the " + \
@@ -18,4 +18,4 @@ class GensimTests(unittest.TestCase):
     "the Matrix and confront the agents: super-powerful computer " + \
     "programs devoted to snuffing out Neo and the entire human " + \
     "rebellion. ")
-       self.assertIsNotNone(summary["summary"])
+       self.assertIsNotNone(summary["tags"])

@@ -24,6 +24,8 @@
     <Compile Include="cerebro\components\allennlp_component.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cerebro\components\textblob_component_tests.py" />
+    <Compile Include="cerebro\components\textblob_component.py" />
     <Compile Include="cerebro\components\gensim_component.py" />
     <Compile Include="cerebro\components\gensim_component_tests.py" />
     <Compile Include="cerebro\components\__init__.py" />
@@ -34,6 +36,7 @@
     <Compile Include="cerebro\services\models.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cerebro\web\controllers\textblob_controller.py" />
     <Compile Include="cerebro\web\controllers\gensim_controller.py" />
     <Compile Include="cerebro\web\controllers\allennlp_controller.py" />
     <Compile Include="cerebro\web\controllers\spacy_controller.py" />
@@ -46,6 +49,11 @@
     <Compile Include="cerebro\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="cerebro\web\templates\textblob\index.html" />
+    <Content Include="cerebro\web\templates\textblob\translation.html" />
+    <Content Include="cerebro\web\templates\textblob\language_detection.html" />
+    <Content Include="cerebro\web\templates\textblob\spelling_correction.html" />
+    <Content Include="cerebro\web\templates\textblob\nlp.html" />
     <Content Include="package\package.bat" />
     <Content Include="package\package.spec" />
     <Content Include="requirements.txt" />
@@ -134,7 +142,33 @@
     <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\gensim\" />
     <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\spacy\" />
     <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\home\" />
+    <Folder Include="cerebro\components\" />
     <Folder Include="cerebro\models\" />
+    <Folder Include="cerebro\services\" />
+    <Folder Include="cerebro\web\" />
+    <Folder Include="cerebro\web\controllers\" />
+    <Folder Include="cerebro\web\services\" />
+    <Folder Include="cerebro\web\static\" />
+    <Folder Include="cerebro\web\static\content\" />
+    <Folder Include="cerebro\web\static\fonts\" />
+    <Folder Include="cerebro\web\static\libs\" />
+    <Folder Include="cerebro\web\static\libs\autosize\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\css\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\js\" />
+    <Folder Include="cerebro\web\static\libs\codemirror\" />
+    <Folder Include="cerebro\web\static\libs\jquery\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\esm\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\umd\" />
+    <Folder Include="cerebro\web\static\libs\vue\" />
+    <Folder Include="cerebro\web\static\scripts\" />
+    <Folder Include="cerebro\web\templates\" />
+    <Folder Include="cerebro\web\templates\allennlp\" />
+    <Folder Include="cerebro\web\templates\gensim\" />
+    <Folder Include="cerebro\web\templates\home\" />
+    <Folder Include="cerebro\web\templates\textblob\" />
+    <Folder Include="cerebro\web\templates\spacy\" />
     <Folder Include="package\" />
   </ItemGroup>
   <ItemGroup>

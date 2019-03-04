@@ -14,17 +14,11 @@ gensim = Gensim()
 
 @app.route('/gensim')
 def gensim_index():
-   return render_template(
-      'gensim/index.html',
-      title='Gensim',
-   )
+   return render_template('gensim/index.html',title='Gensim')
 
 @app.route('/gensim/summarization')
 def gensim_summarization():
-   return render_template(
-      'gensim/summarization.html',
-      title='Gensim',
-   )
+   return render_template('gensim/summarization.html',title='Gensim')
 
 @app.route('/api/gensim/summarization', methods=['GET', 'POST'])
 def api_gensim_summarization():

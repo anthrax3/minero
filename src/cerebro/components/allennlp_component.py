@@ -16,20 +16,16 @@ class AllenNlp(object):
        pass
 
    def machine_comprehension(self, document, question):
-        try:
-           successful, prediction = self.models.try_run('machine_comprehension', 
+           successful, prediction = self.try_run('machine_comprehension', 
               passage = document,
               question = question)
            if not successful:
               return prediction
            return {'answer': prediction['best_span_str'],'answer_span': prediction['best_span']}
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
 
    def named_entity_recognition(self, document):
         try:
-           successful, prediction = self.models.try_run('named_entity_recognition', 
+           successful, prediction = self.try_run('named_entity_recognition', 
               sentence = document)
            if not successful:
               return prediction
@@ -39,8 +35,7 @@ class AllenNlp(object):
             return {"error": str(e)}
 
    def textual_entailment(self, document, hypothesis):
-        try:
-          successful, prediction = self.models.try_run('textual_entailment', 
+          successful, prediction = self.try_run('textual_entailment', 
              premise = document,
              hypothesis = hypothesis)
           if not successful:
@@ -50,75 +45,57 @@ class AllenNlp(object):
               'contradiction': prediction['label_probs'][1],
               'neutral': prediction['label_probs'][2]
               }           
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
 
    def coreference_resolution(self, document):
-        try:
-          successful, prediction = self.models.try_run('coreference_resolution', 
+          successful, prediction = self.try_run('coreference_resolution', 
              document = document)
           if not successful:
               return prediction
           return prediction
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
 
    def semantic_role_labeling(self, document):
-        try:
-          successful, prediction = self.models.try_run('semantic_role_labeling', 
+          successful, prediction = self.try_run('semantic_role_labeling', 
              sentence = document)
           if not successful:
               return prediction
           return prediction           
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
 
    def constituency_parsing(self, document):
-        try:
-          successful, prediction = self.models.try_run('constituency_parsing', 
+          successful, prediction = self.try_run('constituency_parsing', 
              sentence = document)
           if not successful:
               return prediction
           return prediction           
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
    
    def dependency_parsing(self, document):
-        try:
-          successful, prediction = self.models.try_run('dependency_parsing', 
+          successful, prediction = self.try_run('dependency_parsing', 
              sentence = document)
           if not successful:
               return prediction
           return prediction
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
 
    def open_information_extraction(self, document):
-        try:
-          successful, prediction = self.models.try_run('open_information_extraction', 
+          successful, prediction = self.try_run('open_information_extraction', 
              sentence = document)
           if not successful:
               return prediction
           return prediction           
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
   
    def event2mind(self, document):
-        try:
-          successful, prediction = self.models.try_run('event2mind', 
+          successful, prediction = self.try_run('event2mind', 
              source = document)
           if not successful:
               return prediction
           return prediction
-        except Exception as e:
-            logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-            return {"error": str(e)}
+
+   def try_run(self, name, *args, **kwargs):
+       is_valid, result = self.models.validate(name)
+       if not is_valid:
+           return False, {'error': result}
+       self.load(name)
+       model = self.models.get(name).model
+       prediction =  model.predict(*args, **kwargs)
+       return True, prediction
 
   
 

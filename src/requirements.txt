@@ -1,7 +1,9 @@
 Flask
 spacy
-allennlp-0.8.1
+allennlp
 gensim
+textblob
+nltk
 pyinstaller
 matplotlib
 tornado

@@ -14,18 +14,12 @@ allenNlp = AllenNlp()
 
 @app.route('/allennlp')
 def allennlp_index():
-   return render_template(
-      'allennlp/index.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/index.html',title='AllenNlp')
 
 
 @app.route('/allennlp/named_entity_recognition')
 def allennlp_named_entity_recognition():
-   return render_template(
-      'allennlp/named_entity_recognition.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/named_entity_recognition.html',title='AllenNlp')
 
 @app.route('/api/allennlp/named_entity_recognition', methods=['GET', 'POST'])
 def api_allennlp_named_entity_recognition():
@@ -35,10 +29,7 @@ def api_allennlp_named_entity_recognition():
 
 @app.route('/allennlp/constituency_parsing')
 def allennlp_constituency_parsing():
-   return render_template(
-      'allennlp/constituency_parsing.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/constituency_parsing.html',title='AllenNlp')
 
 @app.route('/api/allennlp/constituency_parsing', methods=['GET', 'POST'])
 def api_allennlp_constituency_parsing():
@@ -48,10 +39,7 @@ def api_allennlp_constituency_parsing():
 
 @app.route('/allennlp/semantic_role_labeling')
 def allennlp_semantic_role_labeling():
-   return render_template(
-      'allennlp/semantic_role_labeling.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/semantic_role_labeling.html',title='AllenNlp')
 
 @app.route('/api/allennlp/semantic_role_labeling', methods=['GET', 'POST'])
 def api_allennlp_semantic_role_labeling():
@@ -61,10 +49,7 @@ def api_allennlp_semantic_role_labeling():
 
 @app.route('/allennlp/machine_comprehension')
 def allennlp_machine_comprehension():
-   return render_template(
-      'allennlp/machine_comprehension.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/machine_comprehension.html',title='AllenNlp')
 
 @app.route('/api/allennlp/machine_comprehension', methods=['GET', 'POST'])
 def api_allennlp_machine_comprehension():
@@ -75,10 +60,7 @@ def api_allennlp_machine_comprehension():
 
 @app.route('/allennlp/textual_entailment')
 def allennlp_textual_entailment():
-   return render_template(
-      'allennlp/textual_entailment.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/textual_entailment.html',title='AllenNlp')
 
 @app.route('/api/allennlp/textual_entailment', methods=['GET', 'POST'])
 def api_allennlp_textual_entailment():
@@ -89,10 +71,7 @@ def api_allennlp_textual_entailment():
 
 @app.route('/allennlp/coreference_resolution')
 def allennlp_coreference_resolution():
-   return render_template(
-      'allennlp/coreference_resolution.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/coreference_resolution.html',title='AllenNlp')
 
 @app.route('/api/allennlp/coreference_resolution', methods=['GET', 'POST'])
 def api_allennlp_coreference_resolution():
@@ -102,10 +81,7 @@ def api_allennlp_coreference_resolution():
 
 @app.route('/allennlp/dependency_parsing')
 def allennlp_dependency_parsing():
-   return render_template(
-      'allennlp/dependency_parsing.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/dependency_parsing.html',title='AllenNlp')
 
 @app.route('/api/allennlp/dependency_parsing', methods=['GET', 'POST'])
 def api_allennlp_dependency_parsing():
@@ -116,10 +92,7 @@ def api_allennlp_dependency_parsing():
 
 @app.route('/allennlp/open_information_extraction')
 def allennlp_open_information_extraction():
-   return render_template(
-      'allennlp/open_information_extraction.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/open_information_extraction.html',title='AllenNlp')
 
 @app.route('/api/allennlp/open_information_extraction', methods=['GET', 'POST'])
 def api_allennlp_open_information_extraction():
@@ -130,10 +103,7 @@ def api_allennlp_open_information_extraction():
 
 @app.route('/allennlp/event2mind')
 def allennlp_event2mind():
-   return render_template(
-      'allennlp/event2mind.html',
-      title='AllenNlp',
-   )
+   return render_template('allennlp/event2mind.html',title='AllenNlp')
 
 @app.route('/api/allennlp/event2mind', methods=['GET', 'POST'])
 def api_allennlp_event2mind():
@@ -141,57 +111,25 @@ def api_allennlp_event2mind():
    model = allenNlp.event2mind(document=document)
    return jsonify(model)
 
-
-
 @app.route('/api/allennlp/models/download/<name>')
 def api_allennlp_models_download(name):
-    try:
         allenNlp.models.download(name)
         return jsonify(allenNlp.models.get_status())
-    except Exception as e:
-        logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-        response = jsonify({"error": str(e)})
-        response.status_code = 400
-        return response
 
 @app.route('/api/allennlp/models/load/<name>')
 def api_allennlp_models_load(name):
-    try:
         allenNlp.models.load(name)
         return jsonify(allenNlp.models.get_status())
-    except Exception as e:
-        logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-        response = jsonify({"error": str(e)})
-        response.status_code = 400
-        return response
 
 @app.route('/api/allennlp/models/unload/<name>')
 def api_allennlp_models_unload(name):
-    try:
         allenNlp.models.unload(name)
         return jsonify(allenNlp.models.get_status())
-    except Exception as e:
-        logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-        response = jsonify({"error": str(e)})
-        response.status_code = 400
-        return response
 
 @app.route('/api/allennlp/models/status')
 def api_allennlp_models_status():
-    try:
         return jsonify(allenNlp.models.get_status())
-    except Exception as e:
-        logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-        response = jsonify({"error": str(e)})
-        response.status_code = 400
-        return response
 
 @app.route('/api/allennlp/models/status/<name>')
 def api_allennlp_models_status_by_name(name):
-    try:
         return jsonify([allenNlp.models.get_status_by_name(name)])
-    except Exception as e:
-        logger.error("\n". join(traceback.format_exception(*sys.exc_info())))
-        response = jsonify({"error": str(e)})
-        response.status_code = 400
-        return response

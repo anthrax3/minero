@@ -6,11 +6,24 @@ from os import environ
 import os
 import sys
 import traceback
-#import logging
+import logging
 from flask import Flask
+from flask import render_template, redirect, request, jsonify
+from werkzeug.exceptions import HTTPException
+
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 import cerebro.web.controllers
+
+@app.errorhandler(Exception)
+def handle_error(e):
+    exception = "\n".join(traceback.format_exception(*sys.exc_info()))
+    logger.error(exception)
+    code = 500
+    if isinstance(e, HTTPException):
+        code = e.code
+    return jsonify({"error": str(e), "exception": exception}), code
 
 class Server:
     current_dir = os.path.dirname(os.path.realpath(__file__))

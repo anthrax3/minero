@@ -62,15 +62,6 @@ class Models:
              return False, 'Model ' + name + ' is not downloaded.'
        return True, None
 
-   def try_run(self, name, *args, **kwargs):
-       is_valid, result = self.validate(name)
-       if not is_valid:
-           return False, {'error': result}
-       self.load(name)
-       model = self.get(name).model
-       prediction =  model.predict(*args, **kwargs)
-       return True, prediction
-
    def get_status_by_name(self, name):
        models = self.get_status()
        return next(x for x in models if x['name'] == name)
