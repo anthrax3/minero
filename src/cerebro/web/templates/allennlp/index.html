@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="app" v-cloak>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
+        <h1>AllenNlp</h1>
+        <a target="_blank" href="https://allennlp.org/" class="font-black">https://allennlp.org/</a>
+    </div>
+    <div>
+        <ul>
+            <li>
+                <a href="/allennlp/machine_comprehension">Machine Comprehension</a>
+            </li>
+            <li>
+                <a href="/allennlp/textual_entailment">Textual Entailment</a>
+            </li>
+            <li>
+                <a href="/allennlp/semantic_role_labeling">Semantic Role Labeling</a>
+            </li>
+            <li>
+                <a href="/allennlp/coreference_resolution">Coreference Resolution</a>
+            </li>
+            <li>
+                <a href="/allennlp/named_entity_recognition">Named Entity Recognition</a>
+            </li>
+            <li>
+                <a href="/allennlp/constituency_parsing">Constituency Parsing</a>
+            </li>
+            <li>
+                <a href="/allennlp/dependency_parsing">Dependency Parsing</a>
+            </li>
+            <li>
+                <a href="/allennlp/open_information_extraction">Open Information Extraction</a>
+            </li>
+            <li>
+                <a href="/allennlp/event2mind">Event2Mind</a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+    {% endblock %}

@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% raw %}
+
+<div id="app" v-cloak>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
+        <h1>Gensim - Summarization</h1>
+        <a target="_blank" href="https://radimrehurek.com/gensim/summarization/summariser.html" class="font-black">https://radimrehurek.com/gensim/summarization/summariser.html</a>
+    </div>
+    <div>
+        <a target="_blank" v-bind:href="run_url">/api/gensim/summarization?document={document}</a>
+    </div>
+    <br /><br />
+    <h6>Description</h6>
+    <div class="block">
+        <ul style="padding-left: 20px">
+            <li>Summarization</li>
+        </ul>
+    </div>
+    <br /><br />
+    <h6>Demo
+        <select v-model="example" class="ml-3">
+            <option value=""></option>
+            <option value="John">John</option>
+        </select>
+    </h6>
+    <div class="block">
+        <form>
+            <div class="form-group">
+                <label for="text">document</label>
+                <text-editor v-model="document" lineNumbers="false"></text-editor>
+            </div>
+            <button v-on:click.stop.prevent="run()" class="btn btn-sm btn-outline-secondary" type="submit">
+                Run
+                <span v-if="run_clicked" class="loader"></span>
+            </button>
+            <div>{{run_error}}</div>
+        </form>
+        <br />
+        <div v-if="run_result">
+            <a target="_blank" v-bind:href="run_url">/api/gensim/summarization?document={document}</a>
+            <json-viewer v-model="run_result"></json-viewer>
+        </div>
+    </div>
+</div>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            model: '',
+            document: '',
+            example: '',
+            run_clicked: null,
+            run_error: null,
+            run_result: '',
+            run_url: `/api/gensim/summarization?document=`
+        },
+        watch: {
+            example: function (val) {
+                if (val === 'John') {
+                    this.document = 'John goes to San Francisco tomorrow.';
+                    return;
+                }
+                this.document = '';
+            },
+        },
+        methods: {
+            run: function () {
+                this.run_result = {};
+                this.run_error = null;
+                this.run_url = `/api/gensim/summarization?document=${encodeURIComponent(this.document || '')}`;
+                this.run_clicked = true;
+                this.$fetch(
+                    this.run_url, {
+                        method: "GET"
+                    })
+                    .then(json => {
+                        this.run_clicked = false;
+                        this.run_result = json;
+                    })
+                    .catch(error => {
+                        this.run_clicked = false;
+                        this.run_error = "Error: " + error.message;
+                    });
+            }
+        }
+    });
+</script>
+
+
+{% endraw %}
+
+{% endblock %}

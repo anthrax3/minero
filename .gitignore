@@ -1,8 +1,15 @@
-
+*.pyc
+*.pyo
 src/.vs
 
 src/env
+
 src/env36
 src/env37
 
-src/models
+src/cerebro/models
+
+src/package/build
+
+src/package/dist
+src/package/extra-dll

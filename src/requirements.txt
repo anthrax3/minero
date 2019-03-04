@@ -1,3 +1,7 @@
-Flask==1.0.2
-spacy==2.0.18
+Flask
+spacy
 allennlp-0.8.1
+gensim
+pyinstaller
+matplotlib
+tornado
