@@ -50,10 +50,7 @@ class Downloader:
             self.content_size = None
             self.current_percentage = None
 
-            if not exists(self.path) or self.overwrite:
-                session = requests.Session()
-                response = session.get(self.url, params={}, stream=True, verify=False)
-                self.save_response_content(response)
+            self.on_download()
         
             if self.status == "Stopped" or self.status == "Error":
                 self.is_progress = False
@@ -91,7 +88,6 @@ class Downloader:
                     f.write(chunk)
                     self.current_size += Downloader.CHUNK_SIZE
                     self.current_percentage = int((self.current_size / self.content_size) * 100)
-                    print(self.current_percentage)
         self.status = "Downloaded"
 
     # From https://stackoverflow.com/questions/1094841/reusable-library-to-get-human-readable-version-of-file-size
@@ -101,6 +97,13 @@ class Downloader:
                 return '{:.1f} {}{}'.format(num, unit, suffix)
             num /= 1024.0
         return '{:.1f} {}{}'.format(num, 'Yi', suffix)
+
+    def on_download(self):
+        if not exists(self.path) or self.overwrite:
+                session = requests.Session()
+                response = session.get(self.url, params={}, stream=True, verify=False)
+                self.save_response_content(response)
+        pass
 
     def on_downloaded(self):
         pass

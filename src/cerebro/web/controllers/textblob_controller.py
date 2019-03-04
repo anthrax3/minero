@@ -57,5 +57,23 @@ def api_textblob_language_detection():
    result = textblob.detect_language(document=document)
    return jsonify(result)
 
+@app.route('/api/textblob/models/download/<name>')
+def api_textblob_models_download(name):
+    textblob.models.download(name)
+    return jsonify(textblob.models.get_status())
+
+@app.route('/api/textblob/models/load/<name>')
+def api_textblob_models_load(name):
+    textblob.models.load(name)
+    return jsonify(textblob.models.get_status())
+
+@app.route('/api/textblob/models/unload/<name>')
+def api_textblob_models_unload(name):
+    textblob.models.unload(name)
+    return jsonify(textblob.models.get_status())
+
+@app.route('/api/textblob/models/status')
+def api_textblob_models_status():
+    return jsonify(textblob.models.get_status())
 
 

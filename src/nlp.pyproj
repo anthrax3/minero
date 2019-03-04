@@ -24,6 +24,7 @@
     <Compile Include="cerebro\components\allennlp_component.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cerebro\components\nltk_component.py" />
     <Compile Include="cerebro\components\textblob_component_tests.py" />
     <Compile Include="cerebro\components\textblob_component.py" />
     <Compile Include="cerebro\components\gensim_component.py" />
@@ -36,6 +37,7 @@
     <Compile Include="cerebro\services\models.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cerebro\web\controllers\nltk_controller.py" />
     <Compile Include="cerebro\web\controllers\textblob_controller.py" />
     <Compile Include="cerebro\web\controllers\gensim_controller.py" />
     <Compile Include="cerebro\web\controllers\allennlp_controller.py" />
@@ -49,6 +51,8 @@
     <Compile Include="cerebro\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="cerebro\web\templates\nltk\index.html" />
+    <Content Include="cerebro\web\templates\nltk\vader_sentiment_analysis.html" />
     <Content Include="cerebro\web\templates\textblob\index.html" />
     <Content Include="cerebro\web\templates\textblob\translation.html" />
     <Content Include="cerebro\web\templates\textblob\language_detection.html" />
@@ -167,6 +171,7 @@
     <Folder Include="cerebro\web\templates\allennlp\" />
     <Folder Include="cerebro\web\templates\gensim\" />
     <Folder Include="cerebro\web\templates\home\" />
+    <Folder Include="cerebro\web\templates\nltk\" />
     <Folder Include="cerebro\web\templates\textblob\" />
     <Folder Include="cerebro\web\templates\spacy\" />
     <Folder Include="package\" />

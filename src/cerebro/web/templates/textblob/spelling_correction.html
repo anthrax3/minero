@@ -16,11 +16,17 @@
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li></li>
+            <li>Spelling correction is based on Peter Norvig’s "How to Write a Spelling Corrector"</li>
         </ul>
     </div>
     <br /><br />
-    <h6>Demo
+    <h6>Models</h6>
+    <div class="block">
+        <models v-bind:component="'textblob'"></models>
+    </div>
+    <br /><br />
+    <h6>
+        Demo
         <select v-model="example" class="ml-3">
             <option value=""></option>
             <option value="Thomas A. Anderson">Thomas A. Anderson</option>

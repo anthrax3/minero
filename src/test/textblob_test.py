@@ -2,9 +2,14 @@ from textblob import TextBlob
 from textblob.download_corpora import download_all
 import json
 
-#import nltk
+import nltk
 #nltk.data.path = ["C:\\Projects\\nlp\\src\\cerebro\\models"]
+print(nltk.data.path)
 
+nltk.data.path = []
+print(nltk.data.path)
+from nltk.data import path
+print(path)
 #x = download_all()
 #print(x)
 
