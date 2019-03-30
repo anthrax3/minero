@@ -2,7 +2,7 @@
 
 block_cipher = None
 
-a = Analysis(['../cerebro/__init__.py'],
+a = Analysis(['../nlp/__init__.py'],
              pathex=['C:\\Projects\\nlu'],
              binaries=[('scipy/extra-dll', '.')],
              datas=[],
@@ -18,7 +18,7 @@ pyz = PYZ(a.pure, a.zipped_data,
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          name='cerebro',
+          name='nlp',
           debug=True,
           strip=False,
           upx=True,
@@ -29,4 +29,4 @@ coll = COLLECT(exe,
                a.datas,
                strip=False,
                upx=True,
-               name='cerebro')
+               name='nlp')

@@ -7,7 +7,7 @@ src/env
 src/env36
 src/env37
 
-src/cerebro/models
+src/nlp/models
 
 src/package/build
 
