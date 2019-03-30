@@ -48,6 +48,11 @@ class Models:
            return self.models[name].downloader.is_downloaded()
        return False
 
+   def is_downloading(self, name):
+       if self.exists(name):
+           return self.models[name].downloader.is_downloading()
+       return False
+   
    def get(self, name):
        if self.exists(name):
           return self.models[name]
@@ -78,8 +83,8 @@ class Models:
                'size' : self.models[model_name].size,
                'url' : self.models[model_name].downloader.url,
                'is_loaded': self.is_loaded(model_name),
-               'is_downloaded': self.is_downloaded(model_name),
-               'is_downloading': self.models[model_name].downloader.is_downloading,
+               'is_downloaded': self.models[model_name].downloader.is_downloaded(),
+               'is_downloading': self.models[model_name].downloader.is_downloading(),
                'download_status': self.models[model_name].downloader.status,
                'download_percentage': self.models[model_name].downloader.current_percentage,
                'download_error': self.models[model_name].downloader.error

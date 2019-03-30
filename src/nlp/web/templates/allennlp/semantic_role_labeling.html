@@ -7,15 +7,27 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNlp - Semantic Role Labeling</h1>
-        <a target="_blank" href="https://demo.allennlp.org/semantic-role-labeling" class="font-black">https://demo.allennlp.org/semantic-role-labeling</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/semantic_role_labeling?document={document}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/semantic_role_labeling?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/semantic_role_labeling</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
+            <li><a target="_blank" href="https://demo.allennlp.org/semantic-role-labeling" class="font-black">https://demo.allennlp.org/semantic-role-labeling</a></li>
             <li>Predicates argument structure of a sentence.</li>
             <li>Answer basic questions about sentence meaning, including "who" did "what" to "whom" etc. </li>
         </ul>
@@ -23,7 +35,7 @@
     <br /><br />
     <h6>Models</h6>
     <div class="block">
-        <models v-bind:component="'allennlp'" v-bind:model="'semantic_role_labeling'" ></models>
+        <models v-bind:component="'allennlp'" v-bind:model="'semantic_role_labeling'"></models>
     </div>
     <br /><br />
     <h6>

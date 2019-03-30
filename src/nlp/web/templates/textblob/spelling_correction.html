@@ -7,16 +7,28 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>TextBlob - Spelling correction</h1>
-        <a target="_blank" href="https://github.com/sloria/TextBlob" class="font-black">https://github.com/sloria/TextBlob</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/textblob/spelling_correction?document={document}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/textblob/spelling_correction?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/textblob/spelling_correction</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Spelling correction is based on Peter Norvig’s "How to Write a Spelling Corrector"</li>
+            <li><a target="_blank" href="https://github.com/sloria/TextBlob" class="font-black">https://github.com/sloria/TextBlob</a></li>
+            <li>Spelling correction is based on Peter Norvig's "How to Write a Spelling Corrector"</li>
         </ul>
     </div>
     <br /><br />

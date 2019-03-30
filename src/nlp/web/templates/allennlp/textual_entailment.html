@@ -7,22 +7,35 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNLP - Textual Entailment</h1>
-        <a target="_blank" href="https://demo.allennlp.org/textual-entailment" class="font-black">https://demo.allennlp.org/textual-entailment</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/textual_entailment?document={document}&hypothesis={hypothesis}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/textual_entailment?document={document}&hypothesis={hypothesis}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/textual_entailment</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}",
+          "hypothesis":"hypothesis"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
+            <li><a target="_blank" href="https://demo.allennlp.org/textual-entailment" class="font-black">https://demo.allennlp.org/textual-entailment</a></li>
             <li>Predicts whether the facts in <i>document</i> necessarily imply the facts in <i>hypothesis</i></li>
         </ul>
     </div>
     <br /><br />
     <h6>Models</h6>
     <div class="block">
-        <models v-bind:component="'allennlp'" v-bind:model="'textual_entailment'" ></models>
+        <models v-bind:component="'allennlp'" v-bind:model="'textual_entailment'"></models>
     </div>
     <br /><br />
     <h6>

@@ -7,15 +7,28 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNlp - Machine Comprehension</h1>
-        <a target="_blank" href="https://demo.allennlp.org/machine-comprehension" class="font-black">https://demo.allennlp.org/machine-comprehension</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/machine_comprehension?document={document}&question={question}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/machine_comprehension?document={document}&question={question}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/machine_comprehension</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{question}",
+          "question":"{question}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
+            <li><a target="_blank" href="https://demo.allennlp.org/machine-comprehension" class="font-black">https://demo.allennlp.org/machine-comprehension</a></li>
             <li>Answer natural language questions by selecting an answer span within <i>document</i></li>
         </ul>
     </div>

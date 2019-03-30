@@ -59,6 +59,24 @@ class AllenNlpTests(unittest.TestCase):
       print(result)
       self.assertIsNotNone(result)
 
+   def test_open_information_extraction(self):
+      sut = AllenNlp()
+      sut.models.download('open_information_extraction', override = False, wait_for_completion = True);
+      result = sut.open_information_extraction(
+         document="Alex Honnold climbed up a New Jersey skyscraper."
+      )
+      print(result)
+      self.assertIsNotNone(result['verbs'])
+      
+   def test_dependency_parsing(self):
+      sut = AllenNlp()
+      sut.models.download('dependency_parsing', override = False, wait_for_completion = True);
+      result = sut.dependency_parsing(
+         document="James ate some cheese whilst thinking about the play."
+      )
+      print(result)
+      self.assertIsNotNone(result['tokens'])
+      
 
 
       

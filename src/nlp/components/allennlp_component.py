@@ -61,17 +61,51 @@ class AllenNlp(object):
    def constituency_parsing(self, document):
           successful, prediction = self.predict('constituency_parsing', 
              sentence = document)
-          return prediction           
+          if not successful:
+             return False, {'error': result}
+          result = {'tokens':[], 'spans':prediction['spans'], 'trees':prediction['trees'], 'hierplane_tree':prediction['hierplane_tree']}
+          for index, token in enumerate(prediction['tokens']):
+             result['tokens'].append({
+                'text':token,
+                'pos':prediction['pos_tags'][index]
+                })
+          return result
+              
    
    def dependency_parsing(self, document):
           successful, prediction = self.predict('dependency_parsing', 
              sentence = document)
-          return prediction
+          if not successful:
+             return False, {'error': result}
+          result = {'tokens':[], 'hierplane_tree':prediction['hierplane_tree']}
+          for index, token in enumerate(prediction['words']):
+             result['tokens'].append({
+                'text':token,
+                'pos':prediction['pos'][index],
+                'dependency':prediction['predicted_dependencies'][index],
+                'head':prediction['predicted_heads'][index],
+                })
+          return result
 
    def open_information_extraction(self, document):
           successful, prediction = self.predict('open_information_extraction', 
              sentence = document)
-          return prediction           
+          if not successful:
+             return False, {'error': result}
+          result = {'verbs':[], 'tokens':prediction['words']}
+          for index, verb in enumerate(prediction['verbs']):
+              verb_tokens = []
+              for index, token in enumerate(prediction['words']):
+                  verb_tokens.append({
+                      'token':token,
+                      'tag':verb['tags'][index]
+                      })
+              result['verbs'].append({
+                  'verb':verb['verb'],
+                  'description':verb['description'],
+                  'tokens':verb_tokens,
+                  })
+          return result
   
    def event2mind(self, document):
           successful, prediction = self.predict('event2mind', 

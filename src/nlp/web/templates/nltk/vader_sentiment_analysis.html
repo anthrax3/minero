@@ -7,16 +7,29 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>ntlk - vader sentiment analysis</h1>
-        <a target="_blank" href="http://www.nltk.org/howto/sentiment.html" class="font-black">http://www.nltk.org/howto/sentiment.html</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/ntlk/vader_sentiment_analysis?document={document}</a>
+    <br /><br />
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/ntlk/vader_sentiment_analysis?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/ntlk/vader_sentiment_analysis</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Language detection is powered by the Google Translate API.</li>
+            <li><a target="_blank" href="http://www.nltk.org/howto/sentiment.html" class="font-black">http://www.nltk.org/howto/sentiment.html</a></li>
+            <li>VADER (Valence Aware Dictionary and sEntiment Reasoner) is a lexicon and rule-based sentiment analysis tool</li>
         </ul>
     </div>
     <br /><br />

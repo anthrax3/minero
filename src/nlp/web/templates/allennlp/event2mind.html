@@ -7,15 +7,27 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNLp - Event2Mind</h1>
-        <a target="_blank" href="https://demo.allennlp.org/event2mind" class="font-black">https://demo.allennlp.org/event2mind</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/event2mind?document={document}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/event2mind?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/event2mind</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
+            <li><a target="_blank" href="https://demo.allennlp.org/event2mind" class="font-black">https://demo.allennlp.org/event2mind</a></li>
             <li>Breaks <i>document</i> into sub-phrases, or constituents.</li>
         </ul>
     </div>

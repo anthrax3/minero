@@ -7,16 +7,29 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNlp - Dependency Parsing</h1>
-        <a target="_blank" href="https://demo.allennlp.org/dependency-parsing" class="font-black">https://demo.allennlp.org/dependency-parsing</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/dependency_parsing?document={document}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/dependency_parsing?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/dependency_parsing</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
+            <li><a target="_blank" href="https://demo.allennlp.org/dependency-parsing" class="font-black">https://demo.allennlp.org/dependency-parsing</a></li>
             <li>Finds all expressions that refer to the same entity in a <i>document</i>.</li>
+            <li>Analyzes the grammatical structure of a sentence, establishing relationships between "head" words and words which modify those heads.</li>
         </ul>
     </div>
     <br /><br />

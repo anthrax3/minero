@@ -7,16 +7,28 @@
 <div id="app" v-cloak>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 pt-1">
         <h1>AllenNLp - Open Information Extraction</h1>
-        <a target="_blank" href="https://demo.allennlp.org/open-information-extraction" class="font-black">https://demo.allennlp.org/open-information-extraction</a>
     </div>
-    <div>
-        <a target="_blank" v-bind:href="run_url">/api/allennlp/open_information_extraction?document={document}</a>
+    <h6>API</h6>
+    <div class="block">
+        <div>
+            <span class="api-method">GET</span>  <a target="_blank" v-bind:href="run_url">/api/allennlp/open_information_extraction?document={document}</a>
+        </div>
+        <div>
+            <span class="api-method">POST</span> <a target="_blank" v-bind:href="run_url">/api/allennlp/open_information_extraction</a>
+            <span class="api-method"> </span>
+<pre>
+      {
+          "document":"{document}"
+      }
+</pre>
+        </div>
     </div>
     <br /><br />
     <h6>Description</h6>
     <div class="block">
         <ul style="padding-left: 20px">
-            <li>Breaks <i>document</i> into sub-phrases, or constituents.</li>
+            <li><a target="_blank" href="https://demo.allennlp.org/open-information-extraction" class="font-black">https://demo.allennlp.org/open-information-extraction</a></li>
+            <li>Extraction of relation tuples, typically binary relations, from plain text, such as (Mark Zuckerberg; founded; Facebook).</li>
         </ul>
     </div>
     <br /><br />
@@ -29,7 +41,7 @@
         Demo
         <select v-model="example" class="ml-3">
             <option value=""></option>
-            <option value="Bob">Bob</option>
+            <option value="Alex Honnold">Alex Honnold</option>
         </select>
     </h6>
     <div class="block">
@@ -66,8 +78,8 @@
         },
         watch: {
             example: function (val) {
-                if (val === 'Bob') {
-                    this.document = 'Bob agreed to take out the trash';
+                if (val === 'Alex Honnold') {
+                    this.document = 'Alex Honnold climbed up a New Jersey skyscraper.';
                     return;
                 }
                 this.document = '';
