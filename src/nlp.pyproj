@@ -20,6 +20,9 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="nlp\web\services\request_service.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\components\allennlp_component_tests.py" />
     <Compile Include="nlp\components\allennlp_component.py">
       <SubType>Code</SubType>

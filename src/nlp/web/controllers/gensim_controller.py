@@ -8,6 +8,7 @@ import datetime
 import logging
 from nlp.web.server import app
 from nlp.components import Gensim
+from nlp.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 gensim = Gensim()
@@ -22,7 +23,7 @@ def gensim_summarization():
 
 @app.route('/api/gensim/summarization', methods=['GET', 'POST'])
 def api_gensim_summarization():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    try:
       ratio = float(request.args.get('ratio') if 'ratio' in request.args else '')
    except ValueError:

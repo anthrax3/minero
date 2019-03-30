@@ -8,6 +8,7 @@ import datetime
 import logging
 from nlp.web.server import app
 from nlp.components import TextBlob
+from nlp.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 textblob = TextBlob()
@@ -22,7 +23,7 @@ def textblob_nlp():
 
 @app.route('/api/textblob/nlp', methods=['GET', 'POST'])
 def api_textblob_nlp():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    result = textblob.nlp(document=document)
    return jsonify(result)
 
@@ -32,7 +33,7 @@ def textblob_spelling_correction():
 
 @app.route('/api/textblob/spelling_correction', methods=['GET', 'POST'])
 def api_textblob_spelling_correction():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    result = textblob.spelling_correction(document=document)
    return jsonify(result)
 
@@ -42,8 +43,8 @@ def textblob_translation():
 
 @app.route('/api/textblob/translation', methods=['GET', 'POST'])
 def api_textblob_translation():
-   document = request.args.get('document') if 'document' in request.args else ''
-   language = request.args.get('language') if 'language' in request.args else ''
+   document = RequestService().get_parameter('document')
+   language = RequestService().get_parameter('language')
    result = textblob.translate(document=document,language=language)
    return jsonify(result)
 
@@ -53,7 +54,7 @@ def textblob_language_detection():
 
 @app.route('/api/textblob/language_detection', methods=['GET', 'POST'])
 def api_textblob_language_detection():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    result = textblob.detect_language(document=document)
    return jsonify(result)
 
@@ -77,3 +78,4 @@ def api_textblob_models_status():
     return jsonify(textblob.models.get_status())
 
 
+    

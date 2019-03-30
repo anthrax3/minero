@@ -8,6 +8,7 @@ import datetime
 import logging;
 from nlp.web.server import app
 from nlp.components import AllenNlp
+from nlp.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 allenNlp = AllenNlp()
@@ -23,7 +24,7 @@ def allennlp_named_entity_recognition():
 
 @app.route('/api/allennlp/named_entity_recognition', methods=['GET', 'POST'])
 def api_allennlp_named_entity_recognition():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.named_entity_recognition(document=document)
    return jsonify(model)
 
@@ -33,7 +34,7 @@ def allennlp_constituency_parsing():
 
 @app.route('/api/allennlp/constituency_parsing', methods=['GET', 'POST'])
 def api_allennlp_constituency_parsing():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.constituency_parsing(document=document)
    return jsonify(model)
 
@@ -43,7 +44,7 @@ def allennlp_semantic_role_labeling():
 
 @app.route('/api/allennlp/semantic_role_labeling', methods=['GET', 'POST'])
 def api_allennlp_semantic_role_labeling():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.semantic_role_labeling(document=document)
    return jsonify(model)
 
@@ -53,8 +54,8 @@ def allennlp_machine_comprehension():
 
 @app.route('/api/allennlp/machine_comprehension', methods=['GET', 'POST'])
 def api_allennlp_machine_comprehension():
-   document = request.args.get('document') if 'document' in request.args else ''
-   question = request.args.get('question') if 'question' in request.args else ''
+   document = RequestService().get_parameter('document')
+   question = RequestService().get_parameter('question')
    model = allenNlp.machine_comprehension(document=document, question=question)
    return jsonify(model)
 
@@ -64,8 +65,8 @@ def allennlp_textual_entailment():
 
 @app.route('/api/allennlp/textual_entailment', methods=['GET', 'POST'])
 def api_allennlp_textual_entailment():
-   document = request.args.get('document') if 'document' in request.args else ''
-   hypothesis = request.args.get('hypothesis') if 'hypothesis' in request.args else ''
+   document = RequestService().get_parameter('document')
+   hypothesis = RequestService().get_parameter('hypothesis')
    model = allenNlp.textual_entailment(document=document, hypothesis=hypothesis)
    return jsonify(model)
 
@@ -75,7 +76,7 @@ def allennlp_coreference_resolution():
 
 @app.route('/api/allennlp/coreference_resolution', methods=['GET', 'POST'])
 def api_allennlp_coreference_resolution():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.coreference_resolution(document=document)
    return jsonify(model)
 
@@ -85,7 +86,7 @@ def allennlp_dependency_parsing():
 
 @app.route('/api/allennlp/dependency_parsing', methods=['GET', 'POST'])
 def api_allennlp_dependency_parsing():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.dependency_parsing(document=document)
    return jsonify(model)
 
@@ -96,7 +97,7 @@ def allennlp_open_information_extraction():
 
 @app.route('/api/allennlp/open_information_extraction', methods=['GET', 'POST'])
 def api_allennlp_open_information_extraction():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.open_information_extraction(document=document)
    return jsonify(model)
 
@@ -107,7 +108,7 @@ def allennlp_event2mind():
 
 @app.route('/api/allennlp/event2mind', methods=['GET', 'POST'])
 def api_allennlp_event2mind():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    model = allenNlp.event2mind(document=document)
    return jsonify(model)
 

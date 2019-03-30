@@ -8,6 +8,7 @@ import datetime
 import logging;
 from nlp.web.server import app
 from nlp.components import Spacy
+from nlp.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 spacy = Spacy()
@@ -22,8 +23,8 @@ def spacy_index_nlp():
 
 @app.route('/api/spacy/nlp')
 def api_spacy():
-        model = request.args.get('model') if 'model' in request.args else ''
-        document = request.args.get('document') if 'document' in request.args else ''
+        model = RequestService().get_parameter('model')
+        document = RequestService().get_parameter('document')
         result = spacy.nlp(model, document)
         return jsonify(result)
    
@@ -33,9 +34,9 @@ def spacy_index_similarity():
 
 @app.route('/api/spacy/similarity')
 def api_spacy_similarity():
-   model = request.args.get('model') if 'model' in request.args else ''
-   document = request.args.get('document') if 'document' in request.args else ''
-   similarTo = request.args.get('similarTo') if 'similarTo' in request.args else ''
+   model = RequestService().get_parameter('model')
+   document = RequestService().get_parameter('document')
+   similarTo = RequestService().get_parameter('similarTo')
    result = spacy.similarity(model, document, similarTo)
    return jsonify(result)
     

@@ -8,6 +8,7 @@ import datetime
 import logging
 from nlp.web.server import app
 from nlp.components import Nltk
+from nlp.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 nltk = Nltk()
@@ -22,7 +23,7 @@ def nltk_vader_sentiment_analysis():
 
 @app.route('/api/nltk/vader_sentiment_analysis', methods=['GET', 'POST'])
 def api_vader_sentiment_analysis_nlp():
-   document = request.args.get('document') if 'document' in request.args else ''
+   document = RequestService().get_parameter('document')
    result = nltk.vader_sentiment_analysis(document=document)
    return jsonify(result)
 
