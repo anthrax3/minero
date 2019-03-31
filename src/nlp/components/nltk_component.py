@@ -60,6 +60,6 @@ class NltkDownloader(Downloader):
    def is_downloaded(self):
        self.ensure_path()
        downloaded_models = os.listdir(self.models_path)
-       if 'vader_lexicon' in downloaded_models:
+       if 'sentiment' in downloaded_models:
            return True
        return False

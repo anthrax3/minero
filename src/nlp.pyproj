@@ -58,10 +58,10 @@
     <Content Include="nlp\web\templates\nltk\index.html" />
     <Content Include="nlp\web\templates\nltk\vader_sentiment_analysis.html" />
     <Content Include="nlp\web\templates\textblob\index.html" />
-    <Content Include="nlp\web\templates\textblob\translation.html" />
     <Content Include="nlp\web\templates\textblob\language_detection.html" />
-    <Content Include="nlp\web\templates\textblob\spelling_correction.html" />
     <Content Include="nlp\web\templates\textblob\nlp.html" />
+    <Content Include="nlp\web\templates\textblob\spelling_correction.html" />
+    <Content Include="nlp\web\templates\textblob\translation.html" />
     <Content Include="package\package.bat" />
     <Content Include="package\package.spec" />
     <Content Include="requirements.txt" />
