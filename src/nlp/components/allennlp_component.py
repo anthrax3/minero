@@ -2,10 +2,12 @@ import os
 import traceback
 import sys
 import logging
+import shutil
 from allennlp.predictors.predictor import Predictor
 from nlp.services.downloader import Downloader
 from nlp.services.models import Models
 from nlp.services.models import Model
+from nlp.components import Spacy
 
 logger = logging.getLogger(__name__)
 
@@ -132,7 +134,7 @@ class AllenNlpModels(Models):
            displayName = 'bidaf-model-2017.09.15-charpad.tar.gz',
            description = 'Reimplementation of BiDAF (Seo et al, 2017)',
            size = '44MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/bidaf-model-2017.09.15-charpad.tar.gz',
                path=os.path.join(self.models_path,'bidaf-model-2017.09.15-charpad.tar.gz'))
            ))
@@ -141,7 +143,7 @@ class AllenNlpModels(Models):
            displayName = 'ner-model-2018.12.18.tar.gz',
            description = 'Reimplementation of the state-of-the-art NER model described in Deep contextualized word representations, and uses a biLSTM with CRF layer and ELMo embeddings',
            size = '678MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/ner-model-2018.12.18.tar.gz',
                path=os.path.join(self.models_path,'ner-model-2018.12.18.tar.gz'))
            ))
@@ -150,7 +152,7 @@ class AllenNlpModels(Models):
            displayName = 'decomposable-attention-elmo-2018.02.19.tar.gz',
            description = 'Reimplementation of the decomposable attention model (Parikh et al, 2017)',
            size = '665MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/decomposable-attention-elmo-2018.02.19.tar.gz',
                path=os.path.join(self.models_path,'decomposable-attention-elmo-2018.02.19.tar.gz'))
            ))
@@ -159,7 +161,7 @@ class AllenNlpModels(Models):
            displayName = 'coref-model-2018.02.05.tar.gz',
            description = 'Implementation is based on End-to-End Coreference Resolution (Lee et al, 2017)',
            size = '57MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/coref-model-2018.02.05.tar.gz',
                path=os.path.join(self.models_path,'coref-model-2018.02.05.tar.gz'))
            ))
@@ -168,7 +170,7 @@ class AllenNlpModels(Models):
            displayName = 'srl-model-2018.05.25.tar.gz',
            description = 'Reimplementation of a deep BiLSTM model (He et al, 2017)',
            size = '697MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/srl-model-2018.05.25.tar.gz',
                path=os.path.join(self.models_path,'srl-model-2018.05.25.tar.gz'))
            ))
@@ -177,7 +179,7 @@ class AllenNlpModels(Models):
            displayName = 'elmo-constituency-parser-2018.03.14.tar.gz',
            description = 'Independent scoring of labels and spans from Minimal Span Based Constituency Parser (Stern et al, 2017)',
            size = '677MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/elmo-constituency-parser-2018.03.14.tar.gz',
                path=os.path.join(self.models_path,'elmo-constituency-parser-2018.03.14.tar.gz'))
            ))
@@ -186,7 +188,7 @@ class AllenNlpModels(Models):
            displayName = 'biaffine-dependency-parser-ptb-2018.08.23.tar.gz',
            description = 'Implementation of a neural model for dependency parsing using biaffine classifiers on top of a bidirectional LSTM based on Deep Biaffine Attention for Neural Dependency Parsing (Dozat, 2017)',
            size = '70MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/biaffine-dependency-parser-ptb-2018.08.23.tar.gz',
                path=os.path.join(self.models_path,'biaffine-dependency-parser-ptb-2018.08.23.tar.gz'))
            ))
@@ -195,7 +197,7 @@ class AllenNlpModels(Models):
            displayName = 'openie-model.2018-08-20.tar.gz',
            description = 'Reimplementation of a deep BiLSTM sequence prediction model (Stanovsky et al., 2018)',
            size = '63MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/openie-model.2018-08-20.tar.gz',
                path=os.path.join(self.models_path,'openie-model.2018-08-20.tar.gz'))
            ))
@@ -204,7 +206,7 @@ class AllenNlpModels(Models):
            displayName = 'event2mind-2018.09.17.tar.gz',
            description = 'Reimplementation of the original Event2Mind neural inference model (Rashkin et al, 2018)',
            size = '52MB',
-           downloader = Downloader(
+           downloader = AllennlpDownloader(
                url='https://s3-us-west-2.amazonaws.com/allennlp/models/event2mind-2018.09.17.tar.gz',
                path=os.path.join(self.models_path,'event2mind-2018.09.17.tar.gz'))
            ))    
@@ -229,3 +231,16 @@ class AllenNlpModels(Models):
        if name == 'event2mind' and not self.is_loaded(name):
           self.models[name].model = Predictor.from_path(os.path.join(self.models_path, "event2mind-2018.09.17.tar.gz"))
           
+class AllennlpDownloader(Downloader):
+   def __init__(self, *args, **kwargs):
+        Downloader.__init__(self, *args, **kwargs)
+
+   def on_downloaded(self):
+        self.status = 'DownloadingSpacy'
+        spacy = Spacy()
+        en_core_web_sm_path = os.path.join(spacy.models.models_path, 'en_core_web_sm-2.0.0', 'en_core_web_sm')
+        en_core_web_sm_default_path = os.path.join(spacy.models.models_path, 'en_core_web_sm')
+        if not spacy.models.is_downloaded('en_core_web_sm-2.0.0') or not os.path.exists(en_core_web_sm_default_path):
+            spacy.models.download('en_core_web_sm-2.0.0', wait_for_completion = True)
+            shutil.copytree(en_core_web_sm_path, en_core_web_sm_default_path)
+        pass

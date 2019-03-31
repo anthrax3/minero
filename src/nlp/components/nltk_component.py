@@ -50,7 +50,7 @@ class NltkDownloader(Downloader):
         Downloader.__init__(self, *args, **kwargs)
         self.name = name
         self.models_path = self.path
-        self.ensure_path()
+        self.ensure_models_path()
         nltk.data.path.append(self.models_path);
 
    def on_download(self):
@@ -58,8 +58,11 @@ class NltkDownloader(Downloader):
         nltk.download('vader_lexicon', download_dir=self.models_path)
 
    def is_downloaded(self):
-       self.ensure_path()
        downloaded_models = os.listdir(self.models_path)
        if 'sentiment' in downloaded_models:
            return True
        return False
+
+   def ensure_models_path(self):
+      if not os.path.exists(self.models_path):
+         os.makedirs(self.models_path)
