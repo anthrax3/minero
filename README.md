@@ -2,7 +2,11 @@
 
 Rest api for Spacy, Allennlp, gensim, nltk
 
-### Spacy
+### Service UI
+![Machine Comprehension](Allennlp-MachineComprehension.png)
+
+
+### Spacy API
 - [NLP](https://spacy.io)
 
   Tokenization, Noun chunks, Sentence Segmentation, Part-of-speech tagging, Named Entity Recognition, Word vectors
@@ -15,7 +19,7 @@ Rest api for Spacy, Allennlp, gensim, nltk
   
   /api/spacy/similarity?model={model}&document={document}&similarTo={similarTo}
 
-### Allennlp
+### Allennlp API
 - [Machine Comprehension](https://demo.allennlp.org/machine-comprehension)
 
   Answer natural language questions by selecting an answer span within document
@@ -64,14 +68,14 @@ Rest api for Spacy, Allennlp, gensim, nltk
   
   /api/allennlp/open_information_extraction?document={document}
   
-### Gensim
+### Gensim API
 - [Summarization](https://radimrehurek.com/gensim/summarization/summariser.html)
 
   Summarizing is based on ranks of text sentences using a variation of the TextRank algorithm
 
   /api/gensim/summarization?document={document}
   
-### nltk/TextBlob
+### nltk/TextBlob API
 - [NLP](https://github.com/sloria/TextBlob)
 
   Tokenization, Part-of-speech tagging, Noun phrase extraction, Splitting text into sentences, Sentiment Analysis
