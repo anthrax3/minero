@@ -2,6 +2,14 @@
 
 Rest api for Spacy, Allennlp, gensim, nltk
 
+### Download
+
+| Windows       | macOS  | Linux  |
+| ------------- |:-------------:| -----:|
+| [nlp-0.1](https://github.com/golabek-io/nlp/releases/download/0.1/nlp-0.1.7z) |   |  |
+
+
+
 ### Service UI
 ![Machine Comprehension](Allennlp-MachineComprehension.png)
 
