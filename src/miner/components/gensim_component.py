@@ -4,7 +4,7 @@ import sys
 import logging
 from gensim.summarization import summarize as gensim_summarize
 from gensim.summarization import keywords as gensim_keywords
-from nlp.services.downloader import Downloader
+from miner.services.downloader import Downloader
 
 logger = logging.getLogger(__name__)
 

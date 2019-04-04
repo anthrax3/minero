@@ -1,5 +1,5 @@
 import unittest
-from nlp.components.allennlp_component import AllenNlp
+from miner.components.allennlp_component import AllenNlp
 
 class AllenNlpTests(unittest.TestCase):
 

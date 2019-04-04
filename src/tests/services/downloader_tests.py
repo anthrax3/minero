@@ -1,5 +1,5 @@
 import unittest
-from nlp.services.downloader import Downloader
+from miner.services.downloader import Downloader
 import os
 
 url = "https://raw.githubusercontent.com/golabek-io/nlp/master/README.md"

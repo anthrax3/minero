@@ -6,9 +6,9 @@ import traceback
 import sys
 import datetime
 import logging;
-from nlp.web.server import app
-from nlp.components import Spacy
-from nlp.web.services import RequestService
+from miner.web.server import app
+from miner.components import Spacy
+from miner.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 spacy = Spacy()
@@ -19,7 +19,7 @@ def spacy_index():
 
 @app.route('/spacy/nlp')
 def spacy_index_nlp():
-   return render_template('spacy/nlp.html',title='Spacy')
+   return render_template('spacy/miner.html',title='Spacy')
 
 @app.route('/api/spacy/nlp')
 def api_spacy():

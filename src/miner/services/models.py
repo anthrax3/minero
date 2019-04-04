@@ -1,4 +1,4 @@
-from nlp.config import models_path
+from miner.config import models_path
 
 class Model:
    def __init__(self, name, description = None, downloader = None, size = None, displayName = None):

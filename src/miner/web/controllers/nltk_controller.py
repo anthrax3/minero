@@ -6,9 +6,9 @@ import traceback
 import sys
 import datetime
 import logging
-from nlp.web.server import app
-from nlp.components import Nltk
-from nlp.web.services import RequestService
+from miner.web.server import app
+from miner.components import Nltk
+from miner.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 nltk = Nltk()

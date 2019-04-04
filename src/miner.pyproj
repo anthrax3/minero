@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{80b6a2ff-038c-4b41-8be3-0ee6187ca09b}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>miner\__init__.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>MSBuild|env37|$(MSBuildProjectFullPath)</InterpreterId>
+    <Name>miner</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="miner\web\services\request_service.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\components\allennlp_component_tests.py" />
+    <Compile Include="miner\components\allennlp_component.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="miner\components\nltk_component.py" />
+    <Compile Include="tests\components\nltk_component_tests.py" />
+    <Compile Include="tests\components\textblob_component_tests.py" />
+    <Compile Include="miner\components\textblob_component.py" />
+    <Compile Include="miner\components\gensim_component.py" />
+    <Compile Include="tests\components\gensim_component_tests.py" />
+    <Compile Include="miner\components\__init__.py" />
+    <Compile Include="miner\components\spacy_component.py" />
+    <Compile Include="tests\components\spacy_component_tests.py" />
+    <Compile Include="miner\services\downloader.py" />
+    <Compile Include="tests\services\downloader_tests.py" />
+    <Compile Include="miner\services\models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="miner\web\controllers\nltk_controller.py" />
+    <Compile Include="miner\web\controllers\textblob_controller.py" />
+    <Compile Include="miner\web\controllers\gensim_controller.py" />
+    <Compile Include="miner\web\controllers\allennlp_controller.py" />
+    <Compile Include="miner\web\controllers\spacy_controller.py" />
+    <Compile Include="miner\web\controllers\home_controller.py" />
+    <Compile Include="miner\web\controllers\__init__.py" />
+    <Compile Include="miner\web\server.py" />
+    <Compile Include="miner\web\services\__init__.py" />
+    <Compile Include="miner\web\settings.py" />
+    <Compile Include="miner\config.py" />
+    <Compile Include="miner\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="miner\web\templates\nltk\index.html" />
+    <Content Include="miner\web\templates\nltk\vader_sentiment_analysis.html" />
+    <Content Include="miner\web\templates\textblob\index.html" />
+    <Content Include="miner\web\templates\textblob\language_detection.html" />
+    <Content Include="miner\web\templates\textblob\nlp.html" />
+    <Content Include="miner\web\templates\textblob\spelling_correction.html" />
+    <Content Include="miner\web\templates\textblob\translation.html" />
+    <Content Include="package\package.bat" />
+    <Content Include="package\package.spec" />
+    <Content Include="requirements.txt" />
+    <Content Include="miner\web\static\content\bootstrap.css" />
+    <Content Include="miner\web\static\content\bootstrap.min.css" />
+    <Content Include="miner\web\static\content\site.css" />
+    <Content Include="miner\web\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="miner\web\static\libs\autosize\autosize.js" />
+    <Content Include="miner\web\static\libs\autosize\autosize.min.js" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap.css" />
+    <Content Include="miner\web\static\libs\bootstrap\css\bootstrap.min.css" />
+    <Content Include="miner\web\static\libs\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="miner\web\static\libs\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="miner\web\static\libs\bootstrap\js\bootstrap.js" />
+    <Content Include="miner\web\static\libs\bootstrap\js\bootstrap.min.js" />
+    <Content Include="miner\web\static\libs\codemirror\codemirror.css" />
+    <Content Include="miner\web\static\libs\codemirror\codemirror.js" />
+    <Content Include="miner\web\static\libs\jquery\core.js" />
+    <Content Include="miner\web\static\libs\jquery\jquery.js" />
+    <Content Include="miner\web\static\libs\jquery\jquery.min.js" />
+    <Content Include="miner\web\static\libs\jquery\jquery.slim.js" />
+    <Content Include="miner\web\static\libs\jquery\jquery.slim.min.js" />
+    <Content Include="miner\web\static\libs\modernizr-2.6.2.js" />
+    <Content Include="miner\web\static\libs\popper.js\esm\popper-utils.js" />
+    <Content Include="miner\web\static\libs\popper.js\esm\popper-utils.min.js" />
+    <Content Include="miner\web\static\libs\popper.js\esm\popper.js" />
+    <Content Include="miner\web\static\libs\popper.js\esm\popper.min.js" />
+    <Content Include="miner\web\static\libs\popper.js\popper-utils.js" />
+    <Content Include="miner\web\static\libs\popper.js\popper-utils.min.js" />
+    <Content Include="miner\web\static\libs\popper.js\popper.js" />
+    <Content Include="miner\web\static\libs\popper.js\popper.min.js" />
+    <Content Include="miner\web\static\libs\popper.js\umd\popper-utils.js" />
+    <Content Include="miner\web\static\libs\popper.js\umd\popper-utils.min.js" />
+    <Content Include="miner\web\static\libs\popper.js\umd\popper.js" />
+    <Content Include="miner\web\static\libs\popper.js\umd\popper.min.js" />
+    <Content Include="miner\web\static\libs\respond.js" />
+    <Content Include="miner\web\static\libs\respond.min.js" />
+    <Content Include="miner\web\static\libs\vue\vue.js" />
+    <Content Include="miner\web\static\scripts\vue-components.js" />
+    <Content Include="miner\web\templates\allennlp\event2mind.html" />
+    <Content Include="miner\web\templates\allennlp\open_information_extraction.html" />
+    <Content Include="miner\web\templates\allennlp\dependency_parsing.html" />
+    <Content Include="miner\web\templates\allennlp\coreference_resolution.html" />
+    <Content Include="miner\web\templates\allennlp\textual_entailment.html" />
+    <Content Include="miner\web\templates\allennlp\machine_comprehension.html" />
+    <Content Include="miner\web\templates\allennlp\semantic_role_labeling.html" />
+    <Content Include="miner\web\templates\allennlp\index.html" />
+    <Content Include="miner\web\templates\allennlp\constituency_parsing.html" />
+    <Content Include="miner\web\templates\allennlp\named_entity_recognition.html" />
+    <Content Include="miner\web\templates\gensim\index.html" />
+    <Content Include="miner\web\templates\gensim\summarization.html" />
+    <Content Include="miner\web\templates\spacy\similarity.html" />
+    <Content Include="miner\web\templates\spacy\nlp.html" />
+    <Content Include="miner\web\templates\spacy\index.html" />
+    <Content Include="miner\web\templates\home\index.html" />
+    <Content Include="miner\web\templates\layout.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="C:\Projects\nlp\src\cerebro\components\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\services\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\controllers\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\services\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\content\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\fonts\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\autosize\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\bootstrap\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\bootstrap\css\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\bootstrap\js\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\codemirror\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\jquery\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\popper.js\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\popper.js\esm\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\popper.js\umd\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\libs\vue\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\static\scripts\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\allennlp\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\gensim\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\spacy\" />
+    <Folder Include="C:\Projects\nlp\src\cerebro\web\templates\home\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\components\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\models\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\services\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\controllers\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\services\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\content\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\fonts\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\autosize\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\bootstrap\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\bootstrap\css\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\bootstrap\js\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\codemirror\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\jquery\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\popper.js\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\popper.js\esm\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\popper.js\umd\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\libs\vue\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\static\scripts\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\allennlp\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\gensim\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\home\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\nltk\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\textblob\" />
+    <Folder Include="C:\Projects\nlp\src\nlp\web\templates\spacy\" />
+    <Folder Include="C:\Projects\nlp\src\tests\" />
+    <Folder Include="C:\Projects\nlp\src\miner\" />
+    <Folder Include="C:\Projects\nlp\src\miner\components\" />
+    <Folder Include="C:\Projects\nlp\src\miner\models\" />
+    <Folder Include="C:\Projects\nlp\src\miner\services\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\controllers\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\services\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\content\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\fonts\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\autosize\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\bootstrap\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\bootstrap\css\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\bootstrap\js\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\codemirror\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\jquery\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\popper.js\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\popper.js\esm\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\popper.js\umd\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\libs\vue\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\static\scripts\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\allennlp\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\gensim\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\home\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\nltk\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\spacy\" />
+    <Folder Include="C:\Projects\nlp\src\miner\web\templates\textblob\" />
+    <Folder Include="miner\" />
+    <Folder Include="miner\components\" />
+    <Folder Include="miner\models\" />
+    <Folder Include="miner\services\" />
+    <Folder Include="miner\web\" />
+    <Folder Include="miner\web\controllers\" />
+    <Folder Include="miner\web\services\" />
+    <Folder Include="miner\web\static\" />
+    <Folder Include="miner\web\static\content\" />
+    <Folder Include="miner\web\static\fonts\" />
+    <Folder Include="miner\web\static\libs\" />
+    <Folder Include="miner\web\static\libs\autosize\" />
+    <Folder Include="miner\web\static\libs\bootstrap\" />
+    <Folder Include="miner\web\static\libs\bootstrap\css\" />
+    <Folder Include="miner\web\static\libs\bootstrap\js\" />
+    <Folder Include="miner\web\static\libs\codemirror\" />
+    <Folder Include="miner\web\static\libs\jquery\" />
+    <Folder Include="miner\web\static\libs\popper.js\" />
+    <Folder Include="miner\web\static\libs\popper.js\esm\" />
+    <Folder Include="miner\web\static\libs\popper.js\umd\" />
+    <Folder Include="miner\web\static\libs\vue\" />
+    <Folder Include="miner\web\static\scripts\" />
+    <Folder Include="miner\web\templates\" />
+    <Folder Include="miner\web\templates\allennlp\" />
+    <Folder Include="miner\web\templates\gensim\" />
+    <Folder Include="miner\web\templates\home\" />
+    <Folder Include="miner\web\templates\nltk\" />
+    <Folder Include="miner\web\templates\spacy\" />
+    <Folder Include="miner\web\templates\textblob\" />
+    <Folder Include="nlp\" />
+    <Folder Include="nlp\components\" />
+    <Folder Include="nlp\models\" />
+    <Folder Include="nlp\services\" />
+    <Folder Include="nlp\web\" />
+    <Folder Include="nlp\web\controllers\" />
+    <Folder Include="nlp\web\services\" />
+    <Folder Include="nlp\web\static\" />
+    <Folder Include="nlp\web\static\content\" />
+    <Folder Include="nlp\web\static\fonts\" />
+    <Folder Include="nlp\web\static\libs\" />
+    <Folder Include="nlp\web\static\libs\autosize\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\css\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\js\" />
+    <Folder Include="nlp\web\static\libs\codemirror\" />
+    <Folder Include="nlp\web\static\libs\jquery\" />
+    <Folder Include="nlp\web\static\libs\popper.js\" />
+    <Folder Include="nlp\web\static\libs\popper.js\esm\" />
+    <Folder Include="nlp\web\static\libs\popper.js\umd\" />
+    <Folder Include="nlp\web\static\libs\vue\" />
+    <Folder Include="nlp\web\static\scripts\" />
+    <Folder Include="nlp\web\templates\" />
+    <Folder Include="nlp\web\templates\allennlp\" />
+    <Folder Include="nlp\web\templates\gensim\" />
+    <Folder Include="nlp\web\templates\home\" />
+    <Folder Include="nlp\web\templates\nltk\" />
+    <Folder Include="nlp\web\templates\spacy\" />
+    <Folder Include="nlp\web\templates\textblob\" />
+    <Folder Include="package\" />
+    <Folder Include="tests\" />
+    <Folder Include="tests\components\" />
+    <Folder Include="tests\services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env37\">
+      <Id>env37</Id>
+      <Version>3.7</Version>
+      <Description>env37 (Python 3.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.6</Version>
+      <Description>env (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

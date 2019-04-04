@@ -1,4 +1,4 @@
-from nlp.components.spacy_component import Spacy
+from miner.components.spacy_component import Spacy
 import unittest
 
 class SpacyTests(unittest.TestCase):

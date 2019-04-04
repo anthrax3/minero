@@ -7,9 +7,9 @@ import sys
 import datetime
 import logging
 from spacy.util import set_data_path
-from nlp.services.downloader import Downloader
-from nlp.services.models import Models
-from nlp.services.models import Model
+from miner.services.downloader import Downloader
+from miner.services.models import Models
+from miner.services.models import Model
 
 logger = logging.getLogger(__name__)
 

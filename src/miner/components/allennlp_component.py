@@ -4,10 +4,10 @@ import sys
 import logging
 import shutil
 from allennlp.predictors.predictor import Predictor
-from nlp.services.downloader import Downloader
-from nlp.services.models import Models
-from nlp.services.models import Model
-from nlp.components import Spacy
+from miner.services.downloader import Downloader
+from miner.services.models import Models
+from miner.services.models import Model
+from miner.components import Spacy
 
 logger = logging.getLogger(__name__)
 

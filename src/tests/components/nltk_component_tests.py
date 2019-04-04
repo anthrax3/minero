@@ -1,5 +1,5 @@
 import unittest
-from nlp.components.nltk_component import Nltk
+from miner.components.nltk_component import Nltk
 
 class NltkTests(unittest.TestCase):
 

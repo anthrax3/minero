@@ -6,9 +6,9 @@ import traceback
 import sys
 import datetime
 import logging
-from nlp.web.server import app
-from nlp.components import TextBlob
-from nlp.web.services import RequestService
+from miner.web.server import app
+from miner.components import TextBlob
+from miner.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 textblob = TextBlob()
@@ -19,7 +19,7 @@ def textblob_index():
 
 @app.route('/textblob/nlp')
 def textblob_nlp():
-   return render_template('textblob/nlp.html',title='TextBlob')
+   return render_template('textblob/miner.html',title='TextBlob')
 
 @app.route('/api/textblob/nlp', methods=['GET', 'POST'])
 def api_textblob_nlp():

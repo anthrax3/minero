@@ -1,5 +1,5 @@
 import unittest
-from nlp.components.gensim_component import Gensim
+from miner.components.gensim_component import Gensim
 
 class GensimTests(unittest.TestCase):
      def test_summarize(self):

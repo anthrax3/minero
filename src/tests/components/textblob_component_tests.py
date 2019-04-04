@@ -1,5 +1,5 @@
 import unittest
-from nlp.components.textblob_component import TextBlob
+from miner.components.textblob_component import TextBlob
 
 class TextBlobTests(unittest.TestCase):
      def test_nlp(self):

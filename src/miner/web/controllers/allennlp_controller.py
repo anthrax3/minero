@@ -6,9 +6,9 @@ import traceback
 import sys
 import datetime
 import logging;
-from nlp.web.server import app
-from nlp.components import AllenNlp
-from nlp.web.services import RequestService
+from miner.web.server import app
+from miner.components import AllenNlp
+from miner.web.services import RequestService
 
 logger = logging.getLogger(__name__)
 allenNlp = AllenNlp()

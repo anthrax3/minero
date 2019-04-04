@@ -14,7 +14,7 @@ from werkzeug.exceptions import HTTPException
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-import nlp.web.controllers
+import miner.web.controllers
 
 @app.errorhandler(Exception)
 def handle_error(e):
