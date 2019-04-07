@@ -7,3 +7,6 @@ nltk
 pyinstaller
 matplotlib
 tornado
+whoosh
+selenium
+bs4

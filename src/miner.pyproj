@@ -20,6 +20,8 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="miner\components\crawler_component.py" />
+    <Compile Include="miner\components\whoosh_component.py" />
     <Compile Include="miner\web\services\request_service.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +39,10 @@
     <Compile Include="miner\components\spacy_component.py" />
     <Compile Include="tests\components\spacy_component_tests.py" />
     <Compile Include="miner\services\downloader.py" />
+    <Compile Include="tests\components\clawler_component_tests.py" />
+    <Compile Include="tests\components\whoosh_component_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\services\downloader_tests.py" />
     <Compile Include="miner\services\models.py">
       <SubType>Code</SubType>
@@ -122,6 +128,8 @@
     <Content Include="miner\web\templates\spacy\index.html" />
     <Content Include="miner\web\templates\home\index.html" />
     <Content Include="miner\web\templates\layout.html" />
+    <Content Include="miner\tools\chromedriver.exe" />
+    <Content Include="miner\tools\geckodriver.exe" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="C:\Projects\nlp\src\cerebro\components\" />
@@ -237,35 +245,7 @@
     <Folder Include="miner\web\templates\nltk\" />
     <Folder Include="miner\web\templates\spacy\" />
     <Folder Include="miner\web\templates\textblob\" />
-    <Folder Include="nlp\" />
-    <Folder Include="nlp\components\" />
-    <Folder Include="nlp\models\" />
-    <Folder Include="nlp\services\" />
-    <Folder Include="nlp\web\" />
-    <Folder Include="nlp\web\controllers\" />
-    <Folder Include="nlp\web\services\" />
-    <Folder Include="nlp\web\static\" />
-    <Folder Include="nlp\web\static\content\" />
-    <Folder Include="nlp\web\static\fonts\" />
-    <Folder Include="nlp\web\static\libs\" />
-    <Folder Include="nlp\web\static\libs\autosize\" />
-    <Folder Include="nlp\web\static\libs\bootstrap\" />
-    <Folder Include="nlp\web\static\libs\bootstrap\css\" />
-    <Folder Include="nlp\web\static\libs\bootstrap\js\" />
-    <Folder Include="nlp\web\static\libs\codemirror\" />
-    <Folder Include="nlp\web\static\libs\jquery\" />
-    <Folder Include="nlp\web\static\libs\popper.js\" />
-    <Folder Include="nlp\web\static\libs\popper.js\esm\" />
-    <Folder Include="nlp\web\static\libs\popper.js\umd\" />
-    <Folder Include="nlp\web\static\libs\vue\" />
-    <Folder Include="nlp\web\static\scripts\" />
-    <Folder Include="nlp\web\templates\" />
-    <Folder Include="nlp\web\templates\allennlp\" />
-    <Folder Include="nlp\web\templates\gensim\" />
-    <Folder Include="nlp\web\templates\home\" />
-    <Folder Include="nlp\web\templates\nltk\" />
-    <Folder Include="nlp\web\templates\spacy\" />
-    <Folder Include="nlp\web\templates\textblob\" />
+    <Folder Include="C:\Projects\nlp\src\miner\tools\" />
     <Folder Include="package\" />
     <Folder Include="tests\" />
     <Folder Include="tests\components\" />
