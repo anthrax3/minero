@@ -22,6 +22,7 @@
   <ItemGroup>
     <Compile Include="miner\components\crawler_component.py" />
     <Compile Include="miner\components\whoosh_component.py" />
+    <Compile Include="miner\web\controllers\whoosh_controller.py" />
     <Compile Include="miner\web\services\request_service.py">
       <SubType>Code</SubType>
     </Compile>
@@ -39,7 +40,7 @@
     <Compile Include="miner\components\spacy_component.py" />
     <Compile Include="tests\components\spacy_component_tests.py" />
     <Compile Include="miner\services\downloader.py" />
-    <Compile Include="tests\components\clawler_component_tests.py" />
+    <Compile Include="tests\components\crawler_component_tests.py" />
     <Compile Include="tests\components\whoosh_component_tests.py">
       <SubType>Code</SubType>
     </Compile>
@@ -216,10 +217,37 @@
     <Folder Include="C:\Projects\nlp\src\miner\web\templates\nltk\" />
     <Folder Include="C:\Projects\nlp\src\miner\web\templates\spacy\" />
     <Folder Include="C:\Projects\nlp\src\miner\web\templates\textblob\" />
+    <Folder Include="cerebro\" />
+    <Folder Include="cerebro\components\" />
+    <Folder Include="cerebro\services\" />
+    <Folder Include="cerebro\web\" />
+    <Folder Include="cerebro\web\controllers\" />
+    <Folder Include="cerebro\web\services\" />
+    <Folder Include="cerebro\web\static\" />
+    <Folder Include="cerebro\web\static\content\" />
+    <Folder Include="cerebro\web\static\fonts\" />
+    <Folder Include="cerebro\web\static\libs\" />
+    <Folder Include="cerebro\web\static\libs\autosize\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\css\" />
+    <Folder Include="cerebro\web\static\libs\bootstrap\js\" />
+    <Folder Include="cerebro\web\static\libs\codemirror\" />
+    <Folder Include="cerebro\web\static\libs\jquery\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\esm\" />
+    <Folder Include="cerebro\web\static\libs\popper.js\umd\" />
+    <Folder Include="cerebro\web\static\libs\vue\" />
+    <Folder Include="cerebro\web\static\scripts\" />
+    <Folder Include="cerebro\web\templates\" />
+    <Folder Include="cerebro\web\templates\allennlp\" />
+    <Folder Include="cerebro\web\templates\gensim\" />
+    <Folder Include="cerebro\web\templates\home\" />
+    <Folder Include="cerebro\web\templates\spacy\" />
     <Folder Include="miner\" />
     <Folder Include="miner\components\" />
     <Folder Include="miner\models\" />
     <Folder Include="miner\services\" />
+    <Folder Include="miner\tools\" />
     <Folder Include="miner\web\" />
     <Folder Include="miner\web\controllers\" />
     <Folder Include="miner\web\services\" />
@@ -246,6 +274,35 @@
     <Folder Include="miner\web\templates\spacy\" />
     <Folder Include="miner\web\templates\textblob\" />
     <Folder Include="C:\Projects\nlp\src\miner\tools\" />
+    <Folder Include="nlp\" />
+    <Folder Include="nlp\components\" />
+    <Folder Include="nlp\models\" />
+    <Folder Include="nlp\services\" />
+    <Folder Include="nlp\web\" />
+    <Folder Include="nlp\web\controllers\" />
+    <Folder Include="nlp\web\services\" />
+    <Folder Include="nlp\web\static\" />
+    <Folder Include="nlp\web\static\content\" />
+    <Folder Include="nlp\web\static\fonts\" />
+    <Folder Include="nlp\web\static\libs\" />
+    <Folder Include="nlp\web\static\libs\autosize\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\css\" />
+    <Folder Include="nlp\web\static\libs\bootstrap\js\" />
+    <Folder Include="nlp\web\static\libs\codemirror\" />
+    <Folder Include="nlp\web\static\libs\jquery\" />
+    <Folder Include="nlp\web\static\libs\popper.js\" />
+    <Folder Include="nlp\web\static\libs\popper.js\esm\" />
+    <Folder Include="nlp\web\static\libs\popper.js\umd\" />
+    <Folder Include="nlp\web\static\libs\vue\" />
+    <Folder Include="nlp\web\static\scripts\" />
+    <Folder Include="nlp\web\templates\" />
+    <Folder Include="nlp\web\templates\allennlp\" />
+    <Folder Include="nlp\web\templates\gensim\" />
+    <Folder Include="nlp\web\templates\home\" />
+    <Folder Include="nlp\web\templates\nltk\" />
+    <Folder Include="nlp\web\templates\spacy\" />
+    <Folder Include="nlp\web\templates\textblob\" />
     <Folder Include="package\" />
     <Folder Include="tests\" />
     <Folder Include="tests\components\" />

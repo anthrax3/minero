@@ -3,10 +3,11 @@ import traceback
 import sys
 import logging
 import shutil
+import uuid
 from miner.config import whoosh_path
 from whoosh import index
 from whoosh.filedb.filestore import FileStorage
-from whoosh.fields import Schema, TEXT, KEYWORD, ID, STORED
+from whoosh.fields import Schema, TEXT, KEYWORD, ID, STORED, UnknownFieldError
 from whoosh import analysis, fields, index, qparser, query, scoring
 
 logger = logging.getLogger(__name__)
@@ -28,10 +29,21 @@ class Whoosh:
     def is_index_exists(self, index_name):
         return index.exists_in(self._index_dir(index_name))
 
+    def _ensure_id_field(self, index_name):
+        with self.open_index(index_name).writer() as w:
+            w.add_field("id", fields.ID(unique=True, stored=True))
+
+    def _ensure_fields(self, index_name, document):
+        with self.open_index(index_name).writer() as w:
+            for field_name in document:
+                if field_name not in w.schema:
+                    w.add_field(field_name, fields.TEXT(stored=True))
+
     def create_index(self, index_name, schema = Schema()):
         if not self.is_index_exists(index_name):
             self._ensure_dir(self._index_dir(index_name))
             index.create_in(self._index_dir(index_name), schema=schema)
+            self._ensure_id_field(index_name)
         return self.open_index(index_name)
 
     def delete_index(self, index_name):
@@ -44,9 +56,27 @@ class Whoosh:
         return indexes[index_name]
 
     def index_document(self, index_name, document):
-        writer = self.open_index(index_name).writer()
-        writer.add_document(**document)
-        writer.commit()
+        try:
+            if not "id" in document:
+                document["id"] = str(uuid.uuid4())
+            w = self.open_index(index_name).writer()
+        except index.EmptyIndexError as e:
+            self.create_index(index_name)
+            w = self.open_index(index_name).writer()
+
+        try:
+            w.update_document(**document)
+            w.commit()
+        except UnknownFieldError as e:
+            w.cancel()
+            self._ensure_fields(index_name, document)
+            with self.open_index(index_name).writer() as w2:
+                w2.update_document(**document)
+
+    def delete_document(self, index_name, id):
+        with self.open_index(index_name).writer() as w:
+            w.delete_by_term("id", id)
+        
 
     def find_all(self, index_name, query = None):
         if query:
